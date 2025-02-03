@@ -28,8 +28,6 @@ const LoginPage = () => {
       if (response.ok) {
         // Save token, user name, and user ID in local storage
         localStorage.setItem("token", data.token);
-        localStorage.setItem("userName", data.name);
-        localStorage.setItem("userEmail", data.email);
 
         // Navigate to dashboard with user name
         navigate("/dashboard", { state: { name: data.name } });
