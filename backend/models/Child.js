@@ -10,7 +10,10 @@ const vaccinationSchema = new mongoose.Schema({
         default: 'Pending'
     },
     actualDate: { type: Date }, // Date when the vaccine was taken
-
+    verified: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const childSchema = new mongoose.Schema({

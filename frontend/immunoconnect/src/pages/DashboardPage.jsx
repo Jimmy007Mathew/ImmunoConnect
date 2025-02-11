@@ -9,6 +9,7 @@ import AddChildModal from "./components/Dashboard/AddChildModal";
 import OverviewTab from "./components/Dashboard/tabs/OverviewTab";
 import ProfilesTab from "./components/Dashboard/tabs/ProfilesTab";
 import ScheduleTab from "./components/Dashboard/tabs/ScheduleTab";
+import HealthCenterTab from "./components/Dashboard/tabs/HealthCenterTab";
 import { jwtDecode } from "jwt-decode";
 
 const DashboardPage = () => {
@@ -210,6 +211,7 @@ const DashboardPage = () => {
 
           {activeTab === "overview" && <OverviewTab children={children} />}
           {activeTab === "profiles" && <ProfilesTab children={children} />}
+          {activeTab === "centers" && <HealthCenterTab children={children} />}
           {activeTab === "schedule" && <ScheduleTab />}
         </main>
       </div>

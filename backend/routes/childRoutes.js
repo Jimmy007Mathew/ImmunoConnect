@@ -60,6 +60,7 @@ router.patch('/:childId/vaccinations/:vaccineId', async (req, res) => {
         const { childId, vaccineId } = req.params;
         const { status } = req.body;
 
+        // Find the child
         const child = await Child.findOne({
             _id: childId,
             parent: req.user.id // Ensure the child belongs to the logged-in user
@@ -69,13 +70,17 @@ router.patch('/:childId/vaccinations/:vaccineId', async (req, res) => {
             return res.status(404).json({ message: 'Child not found' });
         }
 
+        // Find the vaccine
         const vaccine = child.vaccinations.id(vaccineId);
         if (!vaccine) {
             return res.status(404).json({ message: 'Vaccine not found' });
         }
 
-        vaccine.status = status;
-        vaccine.actualDate = status === 'Completed' ? new Date() : null;
+        // Only allow updating status and actualDate
+        if (status) {
+            vaccine.status = status;
+            vaccine.actualDate = status === 'Completed' ? new Date() : null;
+        }
 
         await child.save();
         res.json(child);
@@ -91,19 +96,31 @@ router.put('/:childId', async (req, res) => {
         const { childId } = req.params;
         const updates = req.body;
 
+
         // Find the child
         const child = await Child.findOne({
             _id: childId,
-            parent: req.user.id // Ensure the child belongs to the logged-in user
+            parent: req.user.id
         });
 
         if (!child) {
+            console.log("Child not found!");
             return res.status(404).json({ message: 'Child not found' });
         }
+
+        console.log("Found child:", child);
 
         // Update the date of birth and regenerate the vaccination schedule if needed
         if (updates.dateOfBirth) {
             const dob = new Date(updates.dateOfBirth);
+            console.log("New Date of Birth:", dob);
+
+            // Validate date of birth
+            if (isNaN(dob.getTime())) {
+                return res.status(400).json({ message: 'Invalid date format' });
+            }
+
+            // Update the date of birth
             child.dateOfBirth = dob;
 
             // Generate new vaccination schedule
@@ -121,19 +138,29 @@ router.put('/:childId', async (req, res) => {
                 };
             });
 
+
+
+            // Replace the existing vaccinations with the new schedule
             child.vaccinations = newVaccinations;
-            child.markModified('vaccinations'); // Ensure Mongoose detects changes
         }
 
-        // Apply other updates
-        Object.assign(child, updates);
+        // Apply other updates (name, gender, etc.)
+        if (updates.name) child.name = updates.name;
+        if (updates.gender) child.gender = updates.gender;
 
+        // Save the updated child
         await child.save();
+
+
         res.json(child);
     } catch (error) {
+        console.error("Error updating child:", error);
         res.status(500).json({ message: 'Server error' });
     }
 });
+
+
+
 
 
 

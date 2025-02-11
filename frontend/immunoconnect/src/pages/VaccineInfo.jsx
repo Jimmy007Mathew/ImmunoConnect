@@ -34,40 +34,40 @@ const VaccineInfo = () => {
     {
       name: "Tetanus",
       description: "A serious bacterial infection affecting the nervous system",
-      image:
-        "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1000&auto=format&fit=crop",
+      prevention: "DTaP/Tdap vaccines",
+      severity: "High",
     },
     {
       name: "Japanese Encephalitis",
       description: "A viral infection that affects the brain",
-      image:
-        "https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?q=80&w=1000&auto=format&fit=crop",
+      prevention: "JE vaccine",
+      severity: "High",
     },
     {
       name: "Diphtheria",
       description:
         "A serious bacterial infection affecting the nose and throat",
-      image:
-        "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=1000&auto=format&fit=crop",
+      prevention: "DTaP/Tdap vaccines",
+      severity: "High",
     },
     {
       name: "Polio",
       description:
         "A viral disease that can affect nerves and lead to paralysis",
-      image:
-        "https://images.unsplash.com/photo-1579684453423-f84349ef60b0?q=80&w=1000&auto=format&fit=crop",
+      prevention: "IPV/OPV vaccines",
+      severity: "Very High",
     },
     {
       name: "Tuberculosis",
       description: "A bacterial infection primarily affecting the lungs",
-      image:
-        "https://images.unsplash.com/photo-1581593261374-aaa9c0d4d1bd?q=80&w=1000&auto=format&fit=crop",
+      prevention: "BCG vaccine",
+      severity: "High",
     },
     {
       name: "Measles",
       description: "A highly contagious viral infection causing fever and rash",
-      image:
-        "https://images.unsplash.com/photo-1576670159266-ba5b53c324c5?q=80&w=1000&auto=format&fit=crop",
+      prevention: "MMR vaccine",
+      severity: "High",
     },
   ];
 
@@ -91,7 +91,7 @@ const VaccineInfo = () => {
       ],
       color: "bg-gradient-to-br from-blue-400 to-blue-600",
       image:
-        "https://images.unsplash.com/photo-1632053002434-b523bc1de22c?q=80&w=1000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1514192014812-ae2eff10d0f8?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 2,
@@ -113,7 +113,7 @@ const VaccineInfo = () => {
       ],
       color: "bg-gradient-to-br from-purple-400 to-purple-600",
       image:
-        "https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1480985041486-c65b20c01d1f?q=80&w=1776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 3,
@@ -129,7 +129,7 @@ const VaccineInfo = () => {
       risks: ["Mild fever", "Local reactions", "Temporary discomfort"],
       color: "bg-gradient-to-br from-pink-400 to-pink-600",
       image:
-        "https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=1000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1632053002928-1919605ee6f7?q=80&w=1778&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 4,
@@ -149,7 +149,7 @@ const VaccineInfo = () => {
       ],
       color: "bg-gradient-to-br from-green-400 to-green-600",
       image:
-        "https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=1000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1632052999485-d748103abf98?q=80&w=1778&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 5,
@@ -166,7 +166,7 @@ const VaccineInfo = () => {
       risks: ["Mild fever", "Possible rash", "Temporary discomfort"],
       color: "bg-gradient-to-br from-yellow-400 to-yellow-600",
       image:
-        "https://images.unsplash.com/photo-1538108149393-fbbd81895907?q=80&w=1000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1632053001332-2268cc09f738?q=80&w=1778&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 6,
@@ -182,7 +182,7 @@ const VaccineInfo = () => {
       risks: ["Mild reactions", "Temporary fever", "Local discomfort"],
       color: "bg-gradient-to-br from-red-400 to-red-600",
       image:
-        "https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=1000&auto=format&fit=crop",
+        "https://plus.unsplash.com/premium_photo-1663054282494-74a914d0ff89?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 7,
@@ -198,7 +198,7 @@ const VaccineInfo = () => {
       risks: ["Injection site reactions", "Mild fever", "Brief discomfort"],
       color: "bg-gradient-to-br from-indigo-400 to-indigo-600",
       image:
-        "https://images.unsplash.com/photo-1576670159805-381a0aa93b99?q=80&w=1000&auto=format&fit=crop",
+        "https://plus.unsplash.com/premium_photo-1664373622422-cf79623ad08d?q=80&w=1888&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 8,
@@ -214,7 +214,7 @@ const VaccineInfo = () => {
       risks: ["Local reactions", "Mild discomfort", "Brief soreness"],
       color: "bg-gradient-to-br from-cyan-400 to-cyan-600",
       image:
-        "https://images.unsplash.com/photo-1551884170-09fb70a3a2ed?q=80&w=1000&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1576765608622-067973a79f53?q=80&w=1778&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       id: 9,
@@ -387,30 +387,53 @@ const VaccineInfo = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {diseases.map((disease, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow"
-              >
-                <div className="relative h-48">
-                  <img
-                    src={disease.image}
-                    alt={disease.name}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-60"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <h3 className="text-xl font-bold text-white">
-                      {disease.name}
-                    </h3>
-                  </div>
-                </div>
-                <div className="p-4">
-                  <p className="text-gray-600">{disease.description}</p>
-                </div>
-              </div>
-            ))}
+          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="bg-blue-50">
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                      Disease
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                      Description
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                      Prevention
+                    </th>
+                    <th className="px-6 py-4 text-left text-sm font-semibold text-gray-900">
+                      Severity
+                    </th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                  {diseases.map((disease, index) => (
+                    <tr key={index} className="hover:bg-gray-50">
+                      <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                        {disease.name}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {disease.description}
+                      </td>
+                      <td className="px-6 py-4 text-sm text-gray-600">
+                        {disease.prevention}
+                      </td>
+                      <td className="px-6 py-4">
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            disease.severity === "Very High"
+                              ? "bg-red-100 text-red-800"
+                              : "bg-orange-100 text-orange-800"
+                          }`}
+                        >
+                          {disease.severity}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <div className="mt-8 text-center">

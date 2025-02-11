@@ -15,7 +15,6 @@ const ScheduleTab = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-        console.log("API Response:", response.data); // Add this line
         setChildren(response.data);
       } catch (error) {
         console.error("Error fetching children:", error);
@@ -33,7 +32,7 @@ const ScheduleTab = () => {
     }
   }, [selectedChild, children]);
 
-  // Handle marking a vaccine as taken
+  // Handle marking a vaccine as done or pending
   const handleMarkVaccine = async (vaccineId, status) => {
     try {
       const response = await axios.patch(
@@ -103,6 +102,33 @@ const ScheduleTab = () => {
                     <p className="text-sm text-red-600 font-semibold">
                       Pending
                     </p>
+                  )}
+                  {vaccine.status === "Completed" && (
+                    <div className="mt-1 flex items-center gap-2">
+                      <span
+                        className={`text-sm ${
+                          vaccine.verified
+                            ? "text-green-600"
+                            : "text-yellow-600"
+                        }`}
+                      >
+                        {vaccine.verified ? "Verified" : "Pending Verification"}
+                      </span>
+                      {vaccine.verified && (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4 text-green-600"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      )}
+                    </div>
                   )}
                 </div>
                 <button
