@@ -13,10 +13,9 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: "https://mytest-front.vercel.app", // Replace with your frontend URL
-    methods: "GET,POST,PUT,DELETE,PATCH",
-    credentials: true // Allow cookies if needed
+    origin: "*", // Allows all origins (not recommended for production)
 }));
+
 // Use the MongoDB URL from .env
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Connected to MongoDB"))
