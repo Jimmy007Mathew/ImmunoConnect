@@ -25,7 +25,7 @@ const HealthcareSignup = () => {
     }
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/healthcare/signup",
+        "https://mytest-murex-kappa.vercel.app/api/auth/healthcare/signup",
         formData
       );
       alert("Signup request submitted! Admin will review your application.");
