@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({
   origin: 'https://mytest-front.vercel.app', // Allow requests from your frontend
-  credentials: true, // Allow cookies and credentials (if needed)
+
 }));
 
 // Use the MongoDB URL from .env
