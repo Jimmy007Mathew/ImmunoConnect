@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: 'https://mytest-lxq4.vercel.app', // Allow requests from your frontend
+  origin: 'https://mytest-front.vercel.app/', // Allow requests from your frontend
   credentials: true, // Allow cookies and credentials (if needed)
 }));
 
