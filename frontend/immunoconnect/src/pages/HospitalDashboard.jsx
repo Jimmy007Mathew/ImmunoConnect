@@ -16,7 +16,7 @@ const HospitalDashboard = () => {
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/vaccinations/search-parent",
+        "https://mytest-murex-kappa.vercel.app/api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -39,7 +39,7 @@ const HospitalDashboard = () => {
   const handleVerify = async (vaccinationId) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/vaccinations/verify/${vaccinationId}`,
+        `https://mytest-murex-kappa.vercel.app/api/vaccinations/verify/${vaccinationId}`,
         {},
         {
           headers: {
