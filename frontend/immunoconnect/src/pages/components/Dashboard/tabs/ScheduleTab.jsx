@@ -10,7 +10,7 @@ const ScheduleTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/children", {
+        const response = await axios.get("https://mytest-murex-kappa.vercel.app/api/children", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
