@@ -14,7 +14,7 @@ const AdminDashboard = () => {
     const fetchPendingProviders = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/admin/pending-providers",
+          "https://mytest-murex-kappa.vercel.app/api/admin/pending-providers",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
