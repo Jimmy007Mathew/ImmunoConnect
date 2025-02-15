@@ -13,7 +13,8 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: "*", // Allows all origins (not recommended for production)
+  origin: 'https://mytest-lxq4.vercel.app', // Allow requests from your frontend
+  credentials: true, // Allow cookies and credentials (if needed)
 }));
 
 // Use the MongoDB URL from .env
