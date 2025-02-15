@@ -7,6 +7,7 @@ import {
   Calendar,
   MapPin,
   BookOpen,
+  Lock,
 } from "lucide-react";
 
 const LandingPage = () => {
@@ -25,8 +26,8 @@ const LandingPage = () => {
             ImmunoConnect
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Making immunization seamless and accessible for everyone through
-            digital innovation and AI-powered support.
+            Making immunization seamless, accessible, and empowering for
+            everyone through digital innovation.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -100,7 +101,7 @@ const LandingPage = () => {
                 effectively.
               </p>
               <button
-                onClick={() => navigate("/hospital-login")}
+                onClick={() => navigate("/healthcare-signup")}
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
               >
                 Join as Healthcare Center
@@ -161,6 +162,42 @@ const LandingPage = () => {
           </button>
         </div>
       </div>
+
+      {/* Footer Section */}
+      <footer className="bg-gray-800 text-white py-12">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="text-center md:text-left">
+              <h3 className="text-2xl font-bold mb-4">ImmunoConnect</h3>
+              <p className="text-gray-400">
+                Making immunization seamless and accessible for everyone.
+              </p>
+              <p className="text-gray-400 mt-2">
+                &copy; {new Date().getFullYear()} ImmunoConnect. All rights
+                reserved.
+              </p>
+            </div>
+            <div className="flex flex-col items-center md:items-end gap-4">
+              <button
+                onClick={() => navigate("/admin-login")}
+                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center"
+              >
+                <Lock className="w-5 h-5 mr-2" />
+                Admin Login
+              </button>
+              <div className="text-gray-400 text-sm">
+                <a href="/privacy-policy" className="hover:text-gray-300">
+                  Privacy Policy
+                </a>
+                <span className="mx-2">|</span>
+                <a href="/terms-of-service" className="hover:text-gray-300">
+                  Terms of Service
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

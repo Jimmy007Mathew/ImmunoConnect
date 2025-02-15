@@ -171,7 +171,7 @@ const DashboardPage = () => {
         closeSidebar={() => setIsSidebarOpen(false)}
       />
 
-      <div className="flex-1">
+      <div className="flex-1 overflow-y-auto">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
           toggleNotifications={() =>
@@ -180,6 +180,11 @@ const DashboardPage = () => {
           toggleAddChild={() => setShowAddChild(true)}
           toggleChat={() => setShowChat(true)}
           notificationCount={notifications.length}
+          user={{ name: userName, email: userEmail }}
+          onLogout={() => {
+            localStorage.clear();
+            navigate("/");
+          }}
         />
 
         {showNotificationsPanel && (
