@@ -23,6 +23,11 @@
     "react-toastify": "^11.0.3",
     "use-places-autocomplete": "^4.0.1"
   },
+  "scripts": {
+    "dev": "vite", // For local development
+    "build": "vite build", // Builds the production-ready static files
+    "preview": "vite preview" // Previews the production build locally
+  },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@types/react": "^18.3.18",
