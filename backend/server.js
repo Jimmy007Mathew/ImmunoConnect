@@ -16,7 +16,7 @@ app.use(cors({
     origin: [
         "https://mytest-2.onrender.com",
         "https://immuno-connect.vercel.app",
-        "https://immunoconnect.vercel.app/",
+        "https://immunoconnect.vercel.app",
     ],
 
 }));
