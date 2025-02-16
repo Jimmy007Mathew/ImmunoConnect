@@ -13,8 +13,5 @@
       "status": 200
     }
   ],
-  "staticFiles": {
-    "src": "dist",
-    "dest": "/"
-  }
+
 }
