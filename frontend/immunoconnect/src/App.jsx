@@ -5,7 +5,7 @@ import SignupPage from "./pages/SignupPage";
 import DashboardPage from "./pages/DashboardPage";
 import VaccineInfo from "./pages/VaccineInfo";
 import AdminDashboard from "./pages/AdminDashboard";
-import AdminLogin from "./pages/adminLogin";
+import AdminLogin from "./pages/AdminLogin";
 import HospitalDashboard from "./pages/HospitalDashboard";
 import HospitalLogin from "./pages/HospitalLogin";
 import HealthcareSignup from "./pages/HealthcareSignup";
