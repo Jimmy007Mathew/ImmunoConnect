@@ -12,7 +12,7 @@ const ProfilesTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("https://mytest-murex-kappa.vercel.app/api/children", {
+        const response = await axios.get("https://mytest-kk5g.onrender.com/api/children", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -32,7 +32,7 @@ const ProfilesTab = () => {
   // Handle delete child
   const handleDeleteChild = async (childId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/children/${childId}`, {
+      await axios.delete(`https://mytest-kk5g.onrender.com/api/children/${childId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
