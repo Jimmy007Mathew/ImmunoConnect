@@ -11,5 +11,5 @@ export default defineConfig({
   build: {
     outDir: "dist",
   },
-  base: "/", // Ensures correct routing
+  base: "",  // Fixes asset path issues
 });
