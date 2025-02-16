@@ -4,11 +4,12 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: "0.0.0.0", // Ensures it's accessible externally
-    port: 5173, // Explicitly define the port (or change if needed)
-    strictPort: true, // Ensures Vite doesn't switch ports automatically
+    host: "0.0.0.0",
+    port: 5173,
+    strictPort: true,
   },
   build: {
-    outDir: "dist", // Ensure output directory is correct for Vercel
+    outDir: "dist",
   },
+  base: "/", // Ensures correct routing
 });
