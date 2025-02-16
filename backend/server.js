@@ -13,7 +13,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ['https://mytest-2.onrender.com','https://mytest-umber.vercel.app'], // Allow requests from your frontend man
+  origin: 'https://mytest-2.onrender.com', // Allow requests from your frontend man
 
 }));
 
