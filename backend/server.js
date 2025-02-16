@@ -12,16 +12,15 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-
-// ✅ Allow multiple frontend URLs
 app.use(cors({
     origin: [
-        "https://mytest-front.vercel.app",
-        "https://immuno-connect.vercel.app"
+        "https://mytest-2.onrender.com",
+        "https://immuno-connect.vercel.app",
     ],
-    methods: "GET,POST,PUT,DELETE,PATCH",
-    credentials: true // Allow cookies if needed
+
 }));
+
+// Use the MongoDB URL from .env
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Connected to MongoDB"))
     .catch((err) => console.error("MongoDB connection error:", err));
@@ -33,5 +32,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
-// ✅ Export the app for Vercel
-module.exports = app;
+const PORT = process.env.PORT || 10000; // Use Render's default port (10000)
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server is running on port ${PORT}`);
+});
