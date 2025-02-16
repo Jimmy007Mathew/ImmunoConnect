@@ -16,7 +16,7 @@ const AddChildModal = ({ show, onClose }) => {
 
     try {
       const response = await axios.post(
-        "https://mytest-murex-kappa.vercel.app/api/children", // Add full URL
+        "https://mytest-kk5g.onrender.com/api/children", // Add full URL
         newChild,
         {
           headers: {
