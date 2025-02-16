@@ -33,7 +33,7 @@ const SignupPage = () => {
     }
 
     try {
-      const response = await fetch("https://mytest-murex-kappa.vercel.app/api/users/signup", {
+      const response = await fetch("https://mytest-kk5g.onrender.com/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
