@@ -171,7 +171,7 @@ const DashboardPage = () => {
         closeSidebar={() => setIsSidebarOpen(false)}
       />
 
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
           toggleNotifications={() =>
