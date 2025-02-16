@@ -14,7 +14,7 @@ const AdminDashboard = () => {
     const fetchPendingProviders = async () => {
       try {
         const response = await axios.get(
-          "https://mytest-kk5g.onrender.com/api/admin/pending-providers",
+          "https://immunobackend.vercel.app/api/admin/pending-providers",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
@@ -39,7 +39,7 @@ const AdminDashboard = () => {
   const handleVerifyProvider = async (providerId) => {
     try {
       await axios.patch(
-        `https://mytest-kk5g.onrender.com/api/admin/verify-provider/${providerId}`,
+        `https://immunobackend.vercel.app/api/admin/verify-provider/${providerId}`,
         {},
         {
           headers: {

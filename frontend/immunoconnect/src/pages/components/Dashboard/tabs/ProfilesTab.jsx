@@ -12,11 +12,14 @@ const ProfilesTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("https://mytest-kk5g.onrender.com/api/children", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get(
+          "https://immunobackend.vercel.app/api/children",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setChildren(response.data);
       } catch (error) {
         console.error("Error fetching children:", error);
@@ -32,11 +35,14 @@ const ProfilesTab = () => {
   // Handle delete child
   const handleDeleteChild = async (childId) => {
     try {
-      await axios.delete(`https://mytest-kk5g.onrender.com/api/children/${childId}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
+      await axios.delete(
+        `https://immunobackend.vercel.app/api/children/${childId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
       setChildren((prev) => prev.filter((child) => child._id !== childId)); // Remove from UI
     } catch (error) {
       console.error("Error deleting child:", error);
@@ -48,7 +54,7 @@ const ProfilesTab = () => {
   const handleEditChild = async (updatedChild) => {
     try {
       const response = await axios.put(
-        `https://mytest-kk5g.onrender.com/api/children/${updatedChild._id}`,
+        `https://immunobackend.vercel.app/api/children/${updatedChild._id}`,
         updatedChild,
         {
           headers: {

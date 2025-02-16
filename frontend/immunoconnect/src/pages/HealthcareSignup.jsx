@@ -25,7 +25,7 @@ const HealthcareSignup = () => {
     }
     try {
       await axios.post(
-        "https://mytest-kk5g.onrender.com/api/auth/healthcare/signup",
+        "https://immunobackend.vercel.app/api/auth/healthcare/signup",
         formData
       );
       alert("Signup request submitted! Admin will review your application.");

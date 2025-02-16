@@ -15,13 +15,16 @@ const LoginPage = () => {
       // Clear existing localStorage data
       localStorage.clear();
 
-      const response = await fetch("https://mytest-kk5g.onrender.com/api/users/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
+      const response = await fetch(
+        "https://immunobackend.vercel.app/api/users/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        }
+      );
 
       const data = await response.json();
 

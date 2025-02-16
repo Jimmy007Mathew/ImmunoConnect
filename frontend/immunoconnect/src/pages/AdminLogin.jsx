@@ -13,7 +13,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://mytest-kk5g.onrender.com/api/auth/admin/login",
+        "https://immunobackend.vercel.app/api/auth/admin/login",
         {
           email,
           password,

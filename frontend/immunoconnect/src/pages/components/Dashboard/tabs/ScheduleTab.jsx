@@ -10,11 +10,14 @@ const ScheduleTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("https://mytest-kk5g.onrender.com/api/children", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get(
+          "https://immunobackend.vercel.app/api/children",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setChildren(response.data);
       } catch (error) {
         console.error("Error fetching children:", error);
@@ -36,7 +39,7 @@ const ScheduleTab = () => {
   const handleMarkVaccine = async (vaccineId, status) => {
     try {
       const response = await axios.patch(
-        `https://mytest-kk5g.onrender.com/api/children/${selectedChild}/vaccinations/${vaccineId}`,
+        `https://immunobackend.vercel.app/api/children/${selectedChild}/vaccinations/${vaccineId}`,
         { status },
         {
           headers: {

@@ -23,11 +23,14 @@ const OverviewTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("https://mytest-kk5g.onrender.com/api/children", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
+        const response = await axios.get(
+          "https://immunobackend.vercel.app/api/children",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
         setChildren(response.data);
 
         // Set the first child as the selected child if none is selected

@@ -13,7 +13,7 @@ const HospitalLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://mytest-kk5g.onrender.com/api/auth/healthcare/login",
+        "https://immunobackend.vercel.app/api/auth/healthcare/login",
         {
           email,
           password,

@@ -16,7 +16,7 @@ const HospitalDashboard = () => {
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "https://mytest-kk5g.onrender.com/api/vaccinations/search-parent",
+        "https://immunobackend.vercel.app/api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -39,7 +39,7 @@ const HospitalDashboard = () => {
   const handleVerify = async (vaccinationId) => {
     try {
       await axios.patch(
-        `https://mytest-kk5g.onrender.com/api/vaccinations/verify/${vaccinationId}`,
+        `https://immunobackend.vercel.app/api/vaccinations/verify/${vaccinationId}`,
         {},
         {
           headers: {
