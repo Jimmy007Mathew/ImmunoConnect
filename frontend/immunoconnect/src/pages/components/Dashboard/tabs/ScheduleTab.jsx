@@ -36,7 +36,7 @@ const ScheduleTab = () => {
   const handleMarkVaccine = async (vaccineId, status) => {
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/children/${selectedChild}/vaccinations/${vaccineId}`,
+        `https://mytest-kk5g.onrender.com/api/children/${selectedChild}/vaccinations/${vaccineId}`,
         { status },
         {
           headers: {
