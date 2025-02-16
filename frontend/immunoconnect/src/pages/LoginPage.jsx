@@ -15,7 +15,7 @@ const LoginPage = () => {
       // Clear existing localStorage data
       localStorage.clear();
 
-      const response = await fetch("http://localhost:5000/api/users/login", {
+      const response = await fetch("https://mytest-kk5g.onrender.com/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -13,6 +13,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
+
     origin: [
         "https://mytest-2.onrender.com",
         "https://immuno-connect.vercel.app",
@@ -36,3 +37,4 @@ const PORT = process.env.PORT || 10000; // Use Render's default port (10000)
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server is running on port ${PORT}`);
 });
+

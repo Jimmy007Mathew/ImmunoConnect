@@ -12,7 +12,7 @@ const ProfilesTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/children", {
+        const response = await axios.get("https://mytest-kk5g.onrender.com/api/children", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -32,7 +32,7 @@ const ProfilesTab = () => {
   // Handle delete child
   const handleDeleteChild = async (childId) => {
     try {
-      await axios.delete(`http://localhost:5000/api/children/${childId}`, {
+      await axios.delete(`https://mytest-kk5g.onrender.com/api/children/${childId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -48,7 +48,7 @@ const ProfilesTab = () => {
   const handleEditChild = async (updatedChild) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/children/${updatedChild._id}`,
+        `https://mytest-kk5g.onrender.com/api/children/${updatedChild._id}`,
         updatedChild,
         {
           headers: {

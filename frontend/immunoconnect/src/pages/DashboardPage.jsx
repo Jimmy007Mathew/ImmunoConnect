@@ -19,7 +19,7 @@ const DashboardPage = () => {
   const [showAddChild, setShowAddChild] = useState(false);
   const [children, setChildren] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -171,7 +171,7 @@ const DashboardPage = () => {
         closeSidebar={() => setIsSidebarOpen(false)}
       />
 
-      <div className="flex-1 ">
+      <div className="flex-1">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
           toggleNotifications={() =>

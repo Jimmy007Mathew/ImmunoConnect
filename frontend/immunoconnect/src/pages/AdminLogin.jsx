@@ -13,7 +13,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/admin/login",
+        "https://mytest-kk5g.onrender.com/api/auth/admin/login",
         {
           email,
           password,

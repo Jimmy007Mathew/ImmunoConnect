@@ -10,7 +10,7 @@ const ScheduleTab = () => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/children", {
+        const response = await axios.get("https://mytest-kk5g.onrender.com/api/children", {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -36,7 +36,7 @@ const ScheduleTab = () => {
   const handleMarkVaccine = async (vaccineId, status) => {
     try {
       const response = await axios.patch(
-        `http://localhost:5000/api/children/${selectedChild}/vaccinations/${vaccineId}`,
+        `https://mytest-kk5g.onrender.com/api/children/${selectedChild}/vaccinations/${vaccineId}`,
         { status },
         {
           headers: {
