@@ -12,9 +12,11 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors()); // Enable cross-origin requests
-
-// Use the MongoDB URL from .env
+app.use(cors({
+    origin: "https://mytest-front.vercel.app", // Replace with your frontend URL
+    methods: "GET,POST,PUT,DELETE,PATCH",
+    credentials: true // Allow cookies if needed
+}));
 mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("Connected to MongoDB"))
     .catch((err) => console.error("MongoDB connection error:", err));
@@ -27,4 +29,4 @@ app.use('/api/admin', adminRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+module.exports = app;
