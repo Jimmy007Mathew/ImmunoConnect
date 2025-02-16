@@ -13,11 +13,7 @@ const cors = require('cors');
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: [
-        "https://mytest-2.onrender.com",
-        "https://immuno-connect.vercel.app",
-        "https://immunoconnect.vercel.app",
-    ],
+    origin:"https://immunoconnect.vercel.app",
     methods: "GET,POST,PUT,DELETE,PATCH",
     credentials: true,
 }));
