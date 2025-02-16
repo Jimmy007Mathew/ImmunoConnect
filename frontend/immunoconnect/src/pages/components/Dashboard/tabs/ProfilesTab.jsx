@@ -48,7 +48,7 @@ const ProfilesTab = () => {
   const handleEditChild = async (updatedChild) => {
     try {
       const response = await axios.put(
-        `http://localhost:5000/api/children/${updatedChild._id}`,
+        `https://mytest-kk5g.onrender.com/api/children/${updatedChild._id}`,
         updatedChild,
         {
           headers: {
