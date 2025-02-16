@@ -14,7 +14,7 @@ const AdminDashboard = () => {
     const fetchPendingProviders = async () => {
       try {
         const response = await axios.get(
-          "https://mytest-murex-kappa.vercel.app/api/admin/pending-providers",
+          "https://mytest-kk5g.onrender.com/api/admin/pending-providers",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
@@ -39,7 +39,7 @@ const AdminDashboard = () => {
   const handleVerifyProvider = async (providerId) => {
     try {
       await axios.patch(
-        `http://localhost:5000/api/admin/verify-provider/${providerId}`,
+        `https://mytest-kk5g.onrender.com/api/admin/verify-provider/${providerId}`,
         {},
         {
           headers: {
