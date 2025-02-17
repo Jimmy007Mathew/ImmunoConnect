@@ -1,30 +1,38 @@
-require('dotenv').config(); // Load .env file
-
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const cors = require('cors');
+
+// Import route files
 const userRoutes = require('./routes/userRoutes');
 const childRoutes = require('./routes/childRoutes');
 const healthCenterRoutes = require('./routes/healthCenterRoutes');
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const vaccinationRoutes = require('./routes/vaccinationRoutes');
-const cors = require('cors');
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-    origin: [
-        "https://mytest-2.onrender.com",
-        "https://immunoconnect.vercel.app",
-    ],
 
+// CORS Configuration
+app.use(cors({
+    origin: "https://immunoconnect.vercel.app", // Allow only your frontend
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true
 }));
 
-// Use the MongoDB URL from .env
-mongoose.connect(process.env.MONGO_URI)
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
     .then(() => console.log("Connected to MongoDB"))
-    .catch((err) => console.error("MongoDB connection error:", err));
+    .catch(err => {
+        console.error("MongoDB connection error:", err);
+        process.exit(1);
+    });
 
+// Define API Routes
 app.use('/api/users', userRoutes);
 app.use('/api/children', childRoutes);
 app.use('/api/health-centers', healthCenterRoutes);
@@ -32,7 +40,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
-const PORT = process.env.PORT || 10000; // Use Render's default port (10000)
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Vercel requires exporting the app
+module.exports = app;
