@@ -16,8 +16,8 @@ const cors = require("cors");
 
 app.use(cors({
     origin: "*", // Allow all origins
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: false // Set to true only if cookies or authorization headers are needed
+    
+    credentials: true // Set to true only if cookies or authorization headers are needed
 }));
 
 
