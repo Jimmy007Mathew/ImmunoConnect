@@ -1,5 +1,4 @@
-require('dotenv').config(); // Load environment variables
-
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -30,7 +29,7 @@ mongoose.connect(process.env.MONGO_URI, {
 .then(() => console.log("Connected to MongoDB"))
 .catch(err => {
     console.error("MongoDB connection error:", err);
-    process.exit(1); // Stop the server if the database connection fails
+    process.exit(1);
 });
 
 // Define API Routes
@@ -41,8 +40,5 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
-// Start the server
-const PORT = process.env.PORT || 10000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Vercel requires exporting the app
+module.exports = app;
