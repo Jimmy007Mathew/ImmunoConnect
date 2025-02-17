@@ -34,7 +34,7 @@ const SignupPage = () => {
 
     try {
       const response = await fetch(
-        "https://immunobackend.vercel.app/api/users/signup",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/users/signup",
         {
           method: "POST",
           headers: {

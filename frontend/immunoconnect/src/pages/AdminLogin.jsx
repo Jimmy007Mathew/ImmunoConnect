@@ -13,7 +13,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://immunobackend.vercel.app/api/auth/admin/login",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/auth/admin/login",
         {
           email,
           password,

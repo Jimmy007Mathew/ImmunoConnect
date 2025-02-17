@@ -13,7 +13,7 @@ const HospitalLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://immunobackend.vercel.app/api/auth/healthcare/login",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/auth/healthcare/login",
         {
           email,
           password,

@@ -13,7 +13,7 @@ const ProfilesTab = () => {
     const fetchChildren = async () => {
       try {
         const response = await axios.get(
-          "https://immunobackend.vercel.app/api/children",
+          "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -36,7 +36,7 @@ const ProfilesTab = () => {
   const handleDeleteChild = async (childId) => {
     try {
       await axios.delete(
-        `https://immunobackend.vercel.app/api/children/${childId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children/${childId}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -54,7 +54,7 @@ const ProfilesTab = () => {
   const handleEditChild = async (updatedChild) => {
     try {
       const response = await axios.put(
-        `https://immunobackend.vercel.app/api/children/${updatedChild._id}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children/${updatedChild._id}`,
         updatedChild,
         {
           headers: {

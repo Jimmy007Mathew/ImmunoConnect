@@ -11,7 +11,7 @@ const ScheduleTab = () => {
     const fetchChildren = async () => {
       try {
         const response = await axios.get(
-          "https://immunobackend.vercel.app/api/children",
+          "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -39,7 +39,7 @@ const ScheduleTab = () => {
   const handleMarkVaccine = async (vaccineId, status) => {
     try {
       const response = await axios.patch(
-        `https://immunobackend.vercel.app/api/children/${selectedChild}/vaccinations/${vaccineId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children/${selectedChild}/vaccinations/${vaccineId}`,
         { status },
         {
           headers: {

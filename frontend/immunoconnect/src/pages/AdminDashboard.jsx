@@ -14,7 +14,7 @@ const AdminDashboard = () => {
     const fetchPendingProviders = async () => {
       try {
         const response = await axios.get(
-          "https://immunobackend.vercel.app/api/admin/pending-providers",
+          "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/admin/pending-providers",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
@@ -39,7 +39,7 @@ const AdminDashboard = () => {
   const handleVerifyProvider = async (providerId) => {
     try {
       await axios.patch(
-        `https://immunobackend.vercel.app/api/admin/verify-provider/${providerId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/admin/verify-provider/${providerId}`,
         {},
         {
           headers: {

@@ -25,7 +25,7 @@ const HealthcareSignup = () => {
     }
     try {
       await axios.post(
-        "https://immunobackend.vercel.app/api/auth/healthcare/signup",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/auth/healthcare/signup",
         formData
       );
       alert("Signup request submitted! Admin will review your application.");

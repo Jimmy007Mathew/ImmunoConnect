@@ -16,7 +16,7 @@ const HospitalDashboard = () => {
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "https://immunobackend.vercel.app/api/vaccinations/search-parent",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -39,7 +39,7 @@ const HospitalDashboard = () => {
   const handleVerify = async (vaccinationId) => {
     try {
       await axios.patch(
-        `https://immunobackend.vercel.app/api/vaccinations/verify/${vaccinationId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/verify/${vaccinationId}`,
         {},
         {
           headers: {

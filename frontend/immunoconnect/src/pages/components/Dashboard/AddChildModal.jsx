@@ -16,7 +16,7 @@ const AddChildModal = ({ show, onClose }) => {
 
     try {
       const response = await axios.post(
-        "https://immunobackend.vercel.app/api/children", // Add full URL
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children", // Add full URL
         newChild,
         {
           headers: {
