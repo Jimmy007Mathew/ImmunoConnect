@@ -15,8 +15,9 @@ app.use(express.json());
 const cors = require("cors");
 
 app.use(cors({
-    origin: "*", // Allow all origins
+    origin: "https://immunoconnect.vercel.app", // Allow only your frontend
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true
 }));
 
 
