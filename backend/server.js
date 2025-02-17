@@ -12,10 +12,12 @@ const cors = require('cors');
 
 const app = express();
 app.use(express.json());
+const cors = require("cors");
+
 app.use(cors({
-    origin: "https://immunoconnect.vercel.app/login", // Allow your frontend
+    origin: "*", // Allow all origins
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-    credentials: true
+    credentials: false // Set to true only if cookies or authorization headers are needed
 }));
 
 
