@@ -40,5 +40,11 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Internal Server Error' });
+});
+
 // Vercel requires exporting the app
 module.exports = app;
