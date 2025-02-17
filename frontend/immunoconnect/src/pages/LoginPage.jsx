@@ -16,7 +16,7 @@ const LoginPage = () => {
       localStorage.clear();
 
       const response = await fetch(
-        "https://mytest-neon.vercel.app/api/users/login",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/users/login",
         {
           method: "POST",
           headers: {
