@@ -15,13 +15,10 @@ app.use(express.json());
 app.use(cors({
     origin: [
         "https://mytest-2.onrender.com",
-        "https://immuno-connect.vercel.app",
         "https://immunoconnect.vercel.app",
     ],
-    methods: "GET,POST,PUT,DELETE,PATCH",
-    credentials: true,
-}));
 
+}));
 
 // Use the MongoDB URL from .env
 mongoose.connect(process.env.MONGO_URI)
