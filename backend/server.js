@@ -22,13 +22,10 @@ app.use(cors({
 }));
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => console.log("Connected to MongoDB"))
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log("✅ Connected to MongoDB"))
     .catch(err => {
-        console.error("MongoDB connection error:", err);
+        console.error(" MongoDB connection error:", err);
         process.exit(1);
     });
 
@@ -40,11 +37,24 @@ app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/vaccinations', vaccinationRoutes);
 
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: 'Internal Server Error' });
+// Handle Unknown Routes
+app.use((req, res) => {
+    res.status(404).json({ message: "Route Not Found" });
 });
 
-// Vercel requires exporting the app
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.error("Error:", err.stack);
+    res.status(500).json({ message: "Internal Server Error" });
+});
+
+// Start Server if not running on Vercel
+if (process.env.NODE_ENV !== "vercel") {
+    const PORT = process.env.PORT || 8000;
+    app.listen(PORT, "0.0.0.0", () => {
+        console.log(`Server running on port ${PORT}`);
+    });
+}
+
+// Export for Vercel
 module.exports = app;
