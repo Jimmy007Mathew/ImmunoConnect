@@ -1,30 +1,37 @@
 import { useNavigate } from "react-router-dom";
-import { Shield, Syringe, Brain, Calendar, MapPin, BookOpen, Lock } from "lucide-react";
+import {
+  Shield,
+  Syringe,
+  Brain,
+  Calendar,
+  MapPin,
+  BookOpen,
+  Lock,
+} from "lucide-react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-
 // Enhanced animations with smoother transitions and spring physics
 const fadeInUp = {
-  hidden: { 
-    opacity: 0, 
+  hidden: {
+    opacity: 0,
     y: 60,
-    scale: 0.95
+    scale: 0.95,
   },
-  visible: { 
-    opacity: 1, 
+  visible: {
+    opacity: 1,
     y: 0,
     scale: 1,
-    transition: { 
+    transition: {
       duration: 1.2,
       ease: [0.25, 0.1, 0.25, 1],
       scale: {
         type: "spring",
         damping: 15,
-        stiffness: 100
-      }
-    } 
+        stiffness: 100,
+      },
+    },
   },
 };
 
@@ -36,96 +43,95 @@ const staggerContainer = {
       staggerChildren: 0.3,
       delayChildren: 0.2,
       duration: 1,
-      ease: [0.25, 0.1, 0.25, 1]
+      ease: [0.25, 0.1, 0.25, 1],
     },
   },
 };
 
 const fadeIn = {
-  hidden: { 
+  hidden: {
     opacity: 0,
-    scale: 0.98
+    scale: 0.98,
   },
-  visible: { 
+  visible: {
     opacity: 1,
     scale: 1,
-    transition: { 
+    transition: {
       duration: 1.5,
-      ease: [0.25, 0.1, 0.25, 1]
-    } 
+      ease: [0.25, 0.1, 0.25, 1],
+    },
   },
 };
 
 const slideIn = {
-  hidden: { 
+  hidden: {
     x: -60,
     opacity: 0,
-    scale: 0.95
+    scale: 0.95,
   },
-  visible: { 
+  visible: {
     x: 0,
     opacity: 1,
     scale: 1,
-    transition: { 
+    transition: {
       duration: 1.2,
       ease: [0.25, 0.1, 0.25, 1],
       scale: {
         type: "spring",
         damping: 20,
-        stiffness: 100
-      }
-    }
-  }
+        stiffness: 100,
+      },
+    },
+  },
 };
 
 const buttonHover = {
   scale: 1.05,
   transition: {
     duration: 0.3,
-    ease: [0.25, 0.1, 0.25, 1]
-  }
+    ease: [0.25, 0.1, 0.25, 1],
+  },
 };
 
 const buttonTap = {
   scale: 0.95,
   transition: {
-    duration: 0.1
-  }
+    duration: 0.1,
+  },
 };
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   // Enhanced intersection observer configuration
-  const [heroRef, heroInView] = useInView({ 
-    triggerOnce: true, 
+  const [heroRef, heroInView] = useInView({
+    triggerOnce: true,
     threshold: 0.2,
-    rootMargin: "-50px"
+    rootMargin: "-50px",
   });
-  const [featuresRef, featuresInView] = useInView({ 
-    triggerOnce: true, 
+  const [featuresRef, featuresInView] = useInView({
+    triggerOnce: true,
     threshold: 0.2,
-    rootMargin: "-50px"
+    rootMargin: "-50px",
   });
-  const [healthcareRef, healthcareInView] = useInView({ 
-    triggerOnce: true, 
+  const [healthcareRef, healthcareInView] = useInView({
+    triggerOnce: true,
     threshold: 0.2,
-    rootMargin: "-50px"
+    rootMargin: "-50px",
   });
-  const [educationRef, educationInView] = useInView({ 
-    triggerOnce: true, 
+  const [educationRef, educationInView] = useInView({
+    triggerOnce: true,
     threshold: 0.2,
-    rootMargin: "-50px"
+    rootMargin: "-50px",
   });
-  const [ctaRef, ctaInView] = useInView({ 
-    triggerOnce: true, 
+  const [ctaRef, ctaInView] = useInView({
+    triggerOnce: true,
     threshold: 0.2,
-    rootMargin: "-50px"
+    rootMargin: "-50px",
   });
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-    
       <div className="relative z-10 min-h-screen bg-gradient-to-br from-blue-100/90 via-white/90 to-blue-300/90">
         {/* Hero Section */}
         <motion.div
@@ -137,22 +143,22 @@ const LandingPage = () => {
         >
           <motion.div
             variants={fadeInUp}
-            className="max-w-3xl text-center space-y-8 relative backdrop-blur-sm bg-white/30 p-8 rounded-2xl"
+            className="max-w-3xl text-center space-y-8 relative backdrop-blur-sm p-8 rounded-2xl"
           >
-            <motion.div 
+            <motion.div
               className="flex justify-center"
               variants={{
                 hidden: { scale: 0, rotate: -180 },
-                visible: { 
-                  scale: 1, 
+                visible: {
+                  scale: 1,
                   rotate: 0,
-                  transition: { 
+                  transition: {
                     type: "spring",
                     stiffness: 260,
                     damping: 20,
-                    duration: 1.5
-                  }
-                }
+                    duration: 1.5,
+                  },
+                },
               }}
             >
               <Shield className="h-16 w-16 text-blue-600" />
@@ -167,7 +173,8 @@ const LandingPage = () => {
               variants={fadeInUp}
               className="text-xl text-gray-600 max-w-2xl mx-auto"
             >
-              Making immunization seamless, accessible, and empowering for everyone through digital innovation.
+              Making immunization seamless, accessible, and empowering for
+              everyone through digital innovation.
             </motion.p>
             <motion.div
               variants={staggerContainer}
@@ -267,16 +274,15 @@ const LandingPage = () => {
               variants={fadeIn}
               className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12"
             >
-              <motion.div 
-                variants={slideIn}
-                className="flex-1"
-              >
+              <motion.div variants={slideIn} className="flex-1">
                 <Syringe className="w-16 h-16 text-blue-600 mb-6" />
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
                   For Healthcare Centers
                 </h2>
                 <p className="text-gray-600 text-lg mb-6">
-                  Monitor and manage vaccination programs in your region. Access real-time data and coordinate community outreach efforts effectively.
+                  Monitor and manage vaccination programs in your region. Access
+                  real-time data and coordinate community outreach efforts
+                  effectively.
                 </p>
                 <motion.button
                   whileHover={buttonHover}
@@ -290,14 +296,14 @@ const LandingPage = () => {
               <motion.div
                 variants={{
                   hidden: { x: 60, opacity: 0 },
-                  visible: { 
-                    x: 0, 
+                  visible: {
+                    x: 0,
                     opacity: 1,
-                    transition: { 
+                    transition: {
                       duration: 1.2,
-                      ease: [0.25, 0.1, 0.25, 1]
-                    }
-                  }
+                      ease: [0.25, 0.1, 0.25, 1],
+                    },
+                  },
                 }}
                 className="flex-1"
               >
@@ -327,14 +333,14 @@ const LandingPage = () => {
               <motion.div
                 variants={{
                   hidden: { x: -60, opacity: 0 },
-                  visible: { 
-                    x: 0, 
+                  visible: {
+                    x: 0,
                     opacity: 1,
-                    transition: { 
+                    transition: {
                       duration: 1.2,
-                      ease: [0.25, 0.1, 0.25, 1]
-                    }
-                  }
+                      ease: [0.25, 0.1, 0.25, 1],
+                    },
+                  },
                 }}
                 className="flex-1"
               >
@@ -344,16 +350,15 @@ const LandingPage = () => {
                   className="rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300"
                 />
               </motion.div>
-              <motion.div 
-                variants={slideIn}
-                className="flex-1"
-              >
+              <motion.div variants={slideIn} className="flex-1">
                 <BookOpen className="w-16 h-16 text-blue-600 mb-6" />
                 <h2 className="text-3xl font-bold text-gray-900 mb-4">
                   Stay Informed
                 </h2>
                 <p className="text-gray-600 text-lg">
-                  Access reliable information about vaccines, get answers to your questions through our AI assistant, and make informed decisions about your health.
+                  Access reliable information about vaccines, get answers to
+                  your questions through our AI assistant, and make informed
+                  decisions about your health.
                 </p>
               </motion.div>
             </motion.div>
@@ -379,7 +384,8 @@ const LandingPage = () => {
               variants={fadeInUp}
               className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto"
             >
-              Join ImmunoConnect to manage your vaccination records, stay informed, and contribute to a healthier society.
+              Join ImmunoConnect to manage your vaccination records, stay
+              informed, and contribute to a healthier society.
             </motion.p>
             <motion.button
               variants={fadeInUp}
@@ -403,7 +409,8 @@ const LandingPage = () => {
                   Making immunization seamless and accessible for everyone.
                 </p>
                 <p className="text-gray-400 mt-2">
-                  &copy; {new Date().getFullYear()} ImmunoConnect. All rights reserved.
+                  &copy; {new Date().getFullYear()} ImmunoConnect. All rights
+                  reserved.
                 </p>
               </div>
               <div className="flex flex-col items-center md:items-end gap-4">
@@ -417,11 +424,17 @@ const LandingPage = () => {
                   Admin Login
                 </motion.button>
                 <div className="text-gray-400 text-sm">
-                  <a href="/privacy-policy" className="hover:text-gray-300 transition-colors duration-200">
+                  <a
+                    href="/privacy-policy"
+                    className="hover:text-gray-300 transition-colors duration-200"
+                  >
                     Privacy Policy
                   </a>
                   <span className="mx-2">|</span>
-                  <a href="/terms-of-service" className="hover:text-gray-300 transition-colors duration-200">
+                  <a
+                    href="/terms-of-service"
+                    className="hover:text-gray-300 transition-colors duration-200"
+                  >
                     Terms of Service
                   </a>
                 </div>
@@ -438,17 +451,17 @@ const LandingPage = () => {
 const FeatureCard = ({ icon, title, description }) => (
   <motion.div
     variants={fadeInUp}
-    whileHover={{ 
+    whileHover={{
       scale: 1.05,
-      transition: { duration: 0.2 }
+      transition: { duration: 0.2 },
     }}
     className="text-center p-6 rounded-xl hover:shadow-xl transition-all duration-300 bg-white hover:shadow-blue-500/10"
   >
-    <motion.div 
+    <motion.div
       className="flex justify-center mb-6"
-      whileHover={{ 
+      whileHover={{
         rotate: 360,
-        transition: { duration: 0.8, ease: "easeInOut" }
+        transition: { duration: 0.8, ease: "easeInOut" },
       }}
     >
       {icon}
