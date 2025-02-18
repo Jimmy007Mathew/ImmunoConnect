@@ -15,7 +15,7 @@ const AdminLogin = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "https://loud-gretal-immuno-37d08cf0.koyeb.app/auth/admin/login",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/auth/admin/login",
         {
           email,
           password,
