@@ -130,7 +130,7 @@ const HealthcareSignup = () => {
         >
           <div className="h-full w-full bg-black bg-opacity-25 flex items-center justify-center">
             <div className="text-center text-white p-8">
-              <h2 className="text-3xl font-bold mb-4">Protecting What Matters Most</h2>
+              <h2 className="text-3xl font-bold mb-4">Protecting What Matters Most.</h2>
               <p className="text-lg">Keep track of your family's immunization records with ease</p>
             </div>
           </div>
