@@ -23,8 +23,8 @@ const Sidebar = ({
     { icon: Home, label: "Dashboard", id: "overview" },
     { icon: Users, label: "Family Profiles", id: "profiles" },
     { icon: Calendar, label: "Schedule", id: "schedule" },
-    { icon: FileText, label: "Records", id: "records" },
-    { icon: BarChart, label: "Analytics", id: "analytics" },
+    { icon: FileText, label: "Vaccination Card", id: "records" },
+    //{ icon: BarChart, label: "Analytics", id: "analytics" },
     { icon: MapPin, label: "Health Centers", id: "centers" },
   ];
 
