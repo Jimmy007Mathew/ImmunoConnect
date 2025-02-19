@@ -156,6 +156,7 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         activeTab={activeTab}
@@ -171,7 +172,8 @@ const DashboardPage = () => {
         closeSidebar={() => setIsSidebarOpen(false)}
       />
 
-      <div className="flex-1">
+      {/* Main Content */}
+      <div className="flex-1  lg:ml-72">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
           toggleNotifications={() =>
