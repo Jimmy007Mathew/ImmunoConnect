@@ -112,7 +112,9 @@ const ScheduleTab = () => {
                             : "text-yellow-600"
                         }`}
                       >
-                        {vaccine.verified ? "Verified" : "Pending Verification"}
+                        {vaccine.verified
+                          ? `Verified by ${vaccine.verifiedBy}`
+                          : "Pending Verification"}
                       </span>
                       {vaccine.verified && (
                         <svg
