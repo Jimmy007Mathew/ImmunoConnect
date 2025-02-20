@@ -68,6 +68,7 @@ router.patch('/verify/:id', authenticate, verifyHospital, async (req, res) => {
 
         const vaccination = child.vaccinations.id(req.params.id);
         vaccination.verified = true;
+        vaccination.verifiedBy = req.user.hospitalName;
 
         await child.save();
         res.json({ message: 'Vaccination verified successfully' });

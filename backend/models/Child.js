@@ -13,7 +13,8 @@ const vaccinationSchema = new mongoose.Schema({
     verified: {
         type: Boolean,
         default: false
-    }
+    },
+    verifiedBy: { type: String } // Added for hospital verification
 });
 
 const childSchema = new mongoose.Schema({
