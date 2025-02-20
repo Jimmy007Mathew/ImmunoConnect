@@ -47,14 +47,34 @@ const ScheduleTab = () => {
 
       // Update local state
       setVaccinations((prev) =>
-        prev.map((v) => (v._id === vaccineId ? { ...v, status } : v))
+        prev.map((v) =>
+          v._id === vaccineId
+            ? {
+                ...v,
+                status,
+                vaccineOTP: response.data.otp,
+                otpExpires: response.data.otpExpires,
+              }
+            : v
+        )
       );
+
+      if (status === "Completed") {
+        alert(`OTP for verification: ${response.data.otp}`);
+      }
     } catch (error) {
       console.error("Error updating vaccine:", error);
     }
   };
 
   const today = new Date();
+
+  // Helper function to check if OTP is still valid
+  const isOTPValid = (otpExpires) => {
+    if (!otpExpires) return false;
+    const now = new Date();
+    return new Date(otpExpires) > now;
+  };
 
   return (
     <div className="space-y-6">
@@ -132,6 +152,17 @@ const ScheduleTab = () => {
                       )}
                     </div>
                   )}
+                  {/* Display OTP if vaccine is completed and OTP exists and is valid */}
+                  {vaccine.status === "Completed" &&
+                    vaccine.vaccineOTP &&
+                    isOTPValid(vaccine.otpExpires) &&
+                    !vaccine.verified && (
+                      <div className="mt-1 flex items-center gap-2">
+                        <span className="text-sm text-blue-600">
+                          OTP: {vaccine.vaccineOTP}
+                        </span>
+                      </div>
+                    )}
                 </div>
                 <button
                   onClick={() =>
