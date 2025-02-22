@@ -20,7 +20,7 @@ const HospitalDashboard = () => {
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:5000/api/vaccinations/search-parent",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -79,7 +79,7 @@ const HospitalDashboard = () => {
 
       // Proceed with verification
       await axios.patch(
-        `http://localhost:5000/api/vaccinations/verify/${vaccinationId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/verify/${vaccinationId}`,
         {},
         {
           headers: {
