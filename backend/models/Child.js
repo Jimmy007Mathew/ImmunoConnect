@@ -14,7 +14,9 @@ const vaccinationSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    verifiedBy: { type: String } // Added for hospital verification
+    verifiedBy: { type: String }, // Added for hospital verification
+    vaccineOTP: { type: String }, // OTP for verification
+    otpExpires: { type: Date } // OTP expiration time
 });
 
 const childSchema = new mongoose.Schema({

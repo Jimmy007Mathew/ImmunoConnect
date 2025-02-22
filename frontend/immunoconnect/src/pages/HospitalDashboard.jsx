@@ -6,17 +6,21 @@ const HospitalDashboard = () => {
   const [email, setEmail] = useState("");
   const [children, setChildren] = useState([]);
   const [error, setError] = useState("");
+  const [otp, setOtp] = useState(""); // State for OTP input
+  const [selectedVaccinationId, setSelectedVaccinationId] = useState(null); // Track selected vaccination for OTP
   const navigate = useNavigate();
+
   useEffect(() => {
     const hospitalToken = localStorage.getItem("hospitalToken");
     if (!hospitalToken) {
       navigate("/hospital-login", { replace: true });
     }
   }, []);
+
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/search-parent",
+        "http://localhost:5000/api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -38,8 +42,44 @@ const HospitalDashboard = () => {
 
   const handleVerify = async (vaccinationId) => {
     try {
+      // Find the selected vaccination
+      const child = children.find((child) =>
+        child.vaccinations.some((v) => v._id === vaccinationId)
+      );
+      const vaccination = child.vaccinations.find(
+        (v) => v._id === vaccinationId
+      );
+
+      // Check if OTP is valid
+      if (!vaccination.vaccineOTP || !vaccination.otpExpires) {
+        setError("OTP is not available for this vaccination.");
+        return;
+      }
+
+      // Prompt the user to enter OTP
+      const enteredOtp = prompt("Enter the OTP for verification:");
+      if (!enteredOtp) {
+        setError("OTP is required.");
+        return;
+      }
+
+      // Validate OTP
+      const now = new Date();
+      if (enteredOtp !== vaccination.vaccineOTP) {
+        setError("Invalid OTP");
+        return;
+      }
+      if (
+        enteredOtp === vaccination.vaccineOTP &&
+        now > new Date(vaccination.otpExpires)
+      ) {
+        setError("OTP has expired");
+        return;
+      }
+
+      // Proceed with verification
       await axios.patch(
-        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/verify/${vaccinationId}`,
+        `http://localhost:5000/api/vaccinations/verify/${vaccinationId}`,
         {},
         {
           headers: {
@@ -57,11 +97,13 @@ const HospitalDashboard = () => {
           ),
         }))
       );
+      setError("");
     } catch (error) {
       console.error(
         "Verification failed:",
         error.response?.data || error.message
       );
+      setError(error.response?.data?.message || "Verification failed");
     }
   };
 
