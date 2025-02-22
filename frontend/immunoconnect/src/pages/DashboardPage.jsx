@@ -19,7 +19,7 @@ const DashboardPage = () => {
   const [showAddChild, setShowAddChild] = useState(false);
   const [children, setChildren] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -156,6 +156,7 @@ const DashboardPage = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
+      {/* Sidebar */}
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         activeTab={activeTab}
@@ -171,7 +172,8 @@ const DashboardPage = () => {
         closeSidebar={() => setIsSidebarOpen(false)}
       />
 
-      <div className="flex-1 ">
+      {/* Main Content */}
+      <div className="flex-1  lg:ml-72">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
           toggleNotifications={() =>
