@@ -18,6 +18,7 @@ const Sidebar = ({
   setActiveTab,
   user,
   closeSidebar,
+  darkMode,
 }) => {
   const sidebarItems = [
     { icon: Home, label: "Dashboard", id: "overview" },
@@ -31,7 +32,9 @@ const Sidebar = ({
     <div
       className={`${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
+      } fixed inset-y-0 left-0 z-50 w-72 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+        darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+      }`}
       style={{
         position: "fixed", // Ensure sidebar is fixed on desktop
         height: "100vh", // Full height
@@ -62,6 +65,8 @@ const Sidebar = ({
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                     activeTab === item.id
                       ? "bg-blue-50 text-blue-600"
+                      : darkMode
+                      ? "text-gray-300 hover:bg-gray-700"
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
