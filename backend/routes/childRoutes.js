@@ -55,6 +55,10 @@ router.get('/', async (req, res) => {
 });
 
 // PATCH /api/children/:childId/vaccinations/:vaccineId
+const generateOTP = () => {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+};
+
 router.patch('/:childId/vaccinations/:vaccineId', async (req, res) => {
     try {
         const { childId, vaccineId } = req.params;
@@ -80,15 +84,23 @@ router.patch('/:childId/vaccinations/:vaccineId', async (req, res) => {
         if (status) {
             vaccine.status = status;
             vaccine.actualDate = status === 'Completed' ? new Date() : null;
+
+            if (status === 'Completed') {
+                const otp = generateOTP();
+                vaccine.vaccineOTP = otp;
+                vaccine.otpExpires = new Date(Date.now() + 180000); // 3 minutes from now
+            } else {
+                vaccine.vaccineOTP = null;
+                vaccine.otpExpires = null;
+            }
         }
 
         await child.save();
-        res.json(child);
+        res.json({ child, otp: vaccine.vaccineOTP, otpExpires: vaccine.otpExpires, verified: vaccine.verified });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
 });
-
 // PUT /api/children/:childId
 // PUT /api/children/:childId
 router.put('/:childId', async (req, res) => {

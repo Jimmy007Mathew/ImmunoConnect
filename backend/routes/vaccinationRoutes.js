@@ -57,7 +57,6 @@ router.get('/search-parent', authenticate, verifyHospital, async (req, res) => {
     }
 });
 
-// Verify vaccination
 router.patch('/verify/:id', authenticate, verifyHospital, async (req, res) => {
     try {
         const child = await Child.findOne({ 'vaccinations._id': req.params.id });
@@ -67,12 +66,23 @@ router.patch('/verify/:id', authenticate, verifyHospital, async (req, res) => {
         }
 
         const vaccination = child.vaccinations.id(req.params.id);
+
+        // Check if OTP is valid
+        const now = new Date();
+        if (
+            !vaccination.vaccineOTP ||
+            now > new Date(vaccination.otpExpires)
+        ) {
+            return res.status(400).json({ message: 'OTP is invalid or has expired' });
+        }
+
+        // Mark as verified
         vaccination.verified = true;
+        vaccination.verifiedBy = req.user.hospitalName;
 
         await child.save();
         res.json({ message: 'Vaccination verified successfully' });
     } catch (error) {
-
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 });

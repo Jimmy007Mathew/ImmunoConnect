@@ -45,7 +45,7 @@ router.post('/healthcare/login', async (req, res) => {
         }
 
         const token = jwt.sign(
-            { id: provider._id, role: 'healthcare' },
+            { id: provider._id, role: 'healthcare', hospitalName: provider.hospitalName },
             process.env.JWT_SECRET,
             { expiresIn: '1h' }
         );

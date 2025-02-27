@@ -19,7 +19,7 @@ const DashboardPage = () => {
   const [showAddChild, setShowAddChild] = useState(false);
   const [children, setChildren] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [notifications, setNotifications] = useState([
     {
       id: 1,
@@ -52,6 +52,7 @@ const DashboardPage = () => {
   const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [cursorPosition, setCursorPosition] = useState(0);
+  const [darkMode, setDarkMode] = useState(false);
 
   const genAI = new GoogleGenerativeAI(
     "AIzaSyCFOvCB7y-1bcGOje2W0eTg2a0NWTTT-Lk"
@@ -76,6 +77,11 @@ const DashboardPage = () => {
       }
     }
   }, [navigate]);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle("dark", !darkMode);
+  };
 
   const handleAddChild = (e) => {
     e.preventDefault();
@@ -155,7 +161,12 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex">
+    <div
+      className={`min-h-screen ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-gray-900"
+      } flex`}
+    >
+      {/* Sidebar */}
       <Sidebar
         isSidebarOpen={isSidebarOpen}
         activeTab={activeTab}
@@ -169,9 +180,11 @@ const DashboardPage = () => {
           },
         }}
         closeSidebar={() => setIsSidebarOpen(false)}
+        darkMode={darkMode}
       />
 
-      <div className="flex-1 ">
+      {/* Main Content */}
+      <div className="flex-1  lg:ml-72">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
           toggleNotifications={() =>
@@ -185,6 +198,8 @@ const DashboardPage = () => {
             localStorage.clear();
             navigate("/");
           }}
+          darkMode={darkMode}
+          toggleDarkMode={toggleDarkMode}
         />
 
         {showNotificationsPanel && (
@@ -194,12 +209,13 @@ const DashboardPage = () => {
             removeNotification={(id) =>
               setNotifications((prev) => prev.filter((n) => n.id !== id))
             }
+            darkMode={darkMode}
           />
         )}
 
         <main className="p-4 sm:p-6 lg:p-8">
           <div className="mb-6">
-            <h1 className="text-2xl font-bold text-gray-900">
+            <h1 className="text-2xl font-bold">
               {["overview", "profiles", "schedule"]
                 .find((t) => t === activeTab)
                 ?.toUpperCase()}
@@ -214,10 +230,16 @@ const DashboardPage = () => {
             </p>
           </div>
 
-          {activeTab === "overview" && <OverviewTab children={children} />}
-          {activeTab === "profiles" && <ProfilesTab children={children} />}
-          {activeTab === "centers" && <HealthCenterTab children={children} />}
-          {activeTab === "schedule" && <ScheduleTab />}
+          {activeTab === "overview" && (
+            <OverviewTab children={children} darkMode={darkMode} />
+          )}
+          {activeTab === "profiles" && (
+            <ProfilesTab children={children} darkMode={darkMode} />
+          )}
+          {activeTab === "centers" && (
+            <HealthCenterTab children={children} darkMode={darkMode} />
+          )}
+          {activeTab === "schedule" && <ScheduleTab darkMode={darkMode} />}
         </main>
       </div>
 
@@ -228,6 +250,7 @@ const DashboardPage = () => {
         setNewChild={setNewChild}
         handleSubmit={handleAddChild}
         handleVaccinationChange={handleVaccinationChange}
+        darkMode={darkMode}
       />
 
       <ChatAssistant
@@ -240,6 +263,7 @@ const DashboardPage = () => {
         setInputMessage={setInputMessage}
         cursorPosition={cursorPosition}
         setCursorPosition={setCursorPosition}
+        darkMode={darkMode}
       />
     </div>
   );
