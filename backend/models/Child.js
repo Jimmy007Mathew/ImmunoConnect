@@ -13,7 +13,10 @@ const vaccinationSchema = new mongoose.Schema({
     verified: {
         type: Boolean,
         default: false
-    }
+    },
+    verifiedBy: { type: String }, // Added for hospital verification
+    vaccineOTP: { type: String }, // OTP for verification
+    otpExpires: { type: Date } // OTP expiration time
 });
 
 const childSchema = new mongoose.Schema({

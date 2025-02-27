@@ -18,13 +18,13 @@ const Sidebar = ({
   setActiveTab,
   user,
   closeSidebar,
+  darkMode,
 }) => {
   const sidebarItems = [
     { icon: Home, label: "Dashboard", id: "overview" },
     { icon: Users, label: "Family Profiles", id: "profiles" },
     { icon: Calendar, label: "Schedule", id: "schedule" },
-    { icon: FileText, label: "Records", id: "records" },
-    { icon: BarChart, label: "Analytics", id: "analytics" },
+    { icon: FileText, label: "Vaccination Card", id: "records" },
     { icon: MapPin, label: "Health Centers", id: "centers" },
   ];
 
@@ -32,13 +32,20 @@ const Sidebar = ({
     <div
       className={`${
         isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      } fixed inset-y-0 left-0 z-50 w-72 bg-white shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0`}
+      } fixed inset-y-0 left-0 z-50 w-72 shadow-lg transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 ${
+        darkMode ? "bg-gray-800 text-white" : "bg-white text-gray-900"
+      }`}
+      style={{
+        position: "fixed", // Ensure sidebar is fixed on desktop
+        height: "100vh", // Full height
+        overflowY: "auto", // Allow scrolling only for the sidebar
+      }}
     >
       <div className="h-full flex flex-col">
-        <div className="p-4 border-b">
+        <div className="p-4 pt-5 border-b-2">
           <div className="flex items-center justify-between">
             <span className="text-xl font-bold text-blue-600 p-1 flex">
-              <Shield className="h-6 w-6  text-blue-600 mr-3" />
+              <Shield className="h-6 w-6 text-blue-600 mr-3" />
               ImmunoConnect
             </span>
             <button
@@ -58,6 +65,8 @@ const Sidebar = ({
                   className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg transition-colors ${
                     activeTab === item.id
                       ? "bg-blue-50 text-blue-600"
+                      : darkMode
+                      ? "text-gray-300 hover:bg-gray-700"
                       : "text-gray-700 hover:bg-gray-100"
                   }`}
                 >
