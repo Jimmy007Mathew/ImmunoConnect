@@ -53,21 +53,15 @@ const ScheduleTab = ({ darkMode }) => {
             ? {
                 ...v,
                 status,
-                vaccineOTP: response.data.otp,
-                otpExpires: response.data.otpExpires,
+                actualDate: status === "Completed" ? new Date() : null,
               }
             : v
         )
       );
-
-      if (status === "Completed") {
-        alert(`OTP for verification: ${response.data.otp}`);
-      }
     } catch (error) {
       console.error("Error updating vaccine:", error);
     }
   };
-
   const today = new Date();
 
   // Helper function to check if OTP is still valid

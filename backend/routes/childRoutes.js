@@ -84,19 +84,10 @@ router.patch('/:childId/vaccinations/:vaccineId', async (req, res) => {
         if (status) {
             vaccine.status = status;
             vaccine.actualDate = status === 'Completed' ? new Date() : null;
-
-            if (status === 'Completed') {
-                const otp = generateOTP();
-                vaccine.vaccineOTP = otp;
-                vaccine.otpExpires = new Date(Date.now() + 180000); // 3 minutes from now
-            } else {
-                vaccine.vaccineOTP = null;
-                vaccine.otpExpires = null;
-            }
         }
 
         await child.save();
-        res.json({ child, otp: vaccine.vaccineOTP, otpExpires: vaccine.otpExpires, verified: vaccine.verified });
+        res.json({ child });
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }

@@ -3,6 +3,18 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const Child = require('../models/Child');
 
+const nodemailer = require('nodemailer');
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+    },
+});
+
+
+
 // Authentication middleware
 const authenticate = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
@@ -23,6 +35,8 @@ const authenticate = (req, res, next) => {
     }
 };
 
+
+
 // Hospital verification middleware
 const verifyHospital = (req, res, next) => {
 
@@ -33,6 +47,42 @@ const verifyHospital = (req, res, next) => {
     next();
 };
 
+router.post('/send-otp/:vaccinationId', authenticate, verifyHospital, async (req, res) => {
+    try {
+        const { vaccinationId } = req.params;
+
+        // Find the child and vaccination
+        const child = await Child.findOne({ 'vaccinations._id': vaccinationId });
+        if (!child) {
+            return res.status(404).json({ message: 'Child or vaccination not found' });
+        }
+
+        const vaccination = child.vaccinations.id(vaccinationId);
+
+        // Generate OTP
+        const otp = Math.floor(1000 + Math.random() * 9000).toString();
+        const otpExpires = new Date(Date.now() + 300000); // 5 minutes from now
+
+        // Save OTP and expiration time
+        vaccination.vaccineOTP = otp;
+        vaccination.otpExpires = otpExpires;
+        await child.save();
+
+        // Send OTP to parent's email
+        const mailOptions = {
+            from: process.env.EMAIL_USER,
+            to: child.parentEmail,
+            subject: 'Vaccination Verification OTP',
+            text: `Your OTP for verifying the vaccination is: ${otp}. This OTP will expire in 5 minutes.`,
+        };
+
+        await transporter.sendMail(mailOptions);
+
+        res.json({ message: 'OTP sent successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+});
 // Search for parent by email and get their children
 router.get('/search-parent', authenticate, verifyHospital, async (req, res) => {
     try {
@@ -87,4 +137,41 @@ router.patch('/verify/:id', authenticate, verifyHospital, async (req, res) => {
     }
 });
 
+
+
+router.post('/verify-otp/:vaccinationId', authenticate, verifyHospital, async (req, res) => {
+    try {
+        const { vaccinationId } = req.params;
+        const { otp } = req.body;
+
+        // Find the child and vaccination
+        const child = await Child.findOne({ 'vaccinations._id': vaccinationId });
+        if (!child) {
+            return res.status(404).json({ message: 'Child or vaccination not found' });
+        }
+
+        const vaccination = child.vaccinations.id(vaccinationId);
+
+        // Check if OTP is valid
+        const now = new Date();
+        if (
+            !vaccination.vaccineOTP ||
+            now > new Date(vaccination.otpExpires) ||
+            vaccination.vaccineOTP !== otp
+        ) {
+            return res.status(400).json({ message: 'OTP is invalid or has expired' });
+        }
+
+        // Mark as verified
+        vaccination.verified = true;
+        vaccination.verifiedBy = req.user.hospitalName;
+        vaccination.vaccineOTP = null;
+        vaccination.otpExpires = null;
+
+        await child.save();
+        res.json({ message: 'Vaccination verified successfully' });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+});
 module.exports = router;
