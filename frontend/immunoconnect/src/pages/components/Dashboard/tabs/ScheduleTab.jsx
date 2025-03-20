@@ -11,14 +11,11 @@ const ScheduleTab = ({ darkMode }) => {
   useEffect(() => {
     const fetchChildren = async () => {
       try {
-        const response = await axios.get(
-          "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children",
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
+        const response = await axios.get("https://loud-gretal-immuno-37d08cf0.koyeb.app/api/children", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
         setChildren(response.data);
       } catch (error) {
         console.error("Error fetching children:", error);
@@ -56,21 +53,15 @@ const ScheduleTab = ({ darkMode }) => {
             ? {
                 ...v,
                 status,
-                vaccineOTP: response.data.otp,
-                otpExpires: response.data.otpExpires,
+                actualDate: status === "Completed" ? new Date() : null,
               }
             : v
         )
       );
-
-      if (status === "Completed") {
-        alert(`OTP for verification: ${response.data.otp}`);
-      }
     } catch (error) {
       console.error("Error updating vaccine:", error);
     }
   };
-
   const today = new Date();
 
   // Helper function to check if OTP is still valid
