@@ -20,7 +20,7 @@ const HospitalDashboard = () => {
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/search-parent",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app//api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -42,45 +42,28 @@ const HospitalDashboard = () => {
 
   const handleVerify = async (vaccinationId) => {
     try {
-      // Find the selected vaccination
-      const child = children.find((child) =>
-        child.vaccinations.some((v) => v._id === vaccinationId)
+      // Send OTP to parent's email
+      const response = await axios.post(
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app//api/vaccinations/send-otp/${vaccinationId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("hospitalToken")}`,
+          },
+        }
       );
-      const vaccination = child.vaccinations.find(
-        (v) => v._id === vaccinationId
-      );
-
-      // Check if OTP is valid
-      if (!vaccination.vaccineOTP || !vaccination.otpExpires) {
-        setError("OTP is not available for this vaccination.");
-        return;
-      }
 
       // Prompt the user to enter OTP
-      const enteredOtp = prompt("Enter the OTP for verification:");
+      const enteredOtp = prompt("Enter the OTP sent to the parent's email:");
       if (!enteredOtp) {
         setError("OTP is required.");
         return;
       }
 
-      // Validate OTP
-      const now = new Date();
-      if (enteredOtp !== vaccination.vaccineOTP) {
-        setError("Invalid OTP");
-        return;
-      }
-      if (
-        enteredOtp === vaccination.vaccineOTP &&
-        now > new Date(vaccination.otpExpires)
-      ) {
-        setError("OTP has expired");
-        return;
-      }
-
-      // Proceed with verification
-      await axios.patch(
-        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/verify/${vaccinationId}`,
-        {},
+      // Verify OTP
+      const verifyResponse = await axios.post(
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app//api/vaccinations/verify-otp/${vaccinationId}`,
+        { otp: enteredOtp },
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("hospitalToken")}`,
