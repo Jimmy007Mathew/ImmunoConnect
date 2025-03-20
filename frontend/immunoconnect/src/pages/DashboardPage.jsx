@@ -55,7 +55,7 @@ const DashboardPage = () => {
   const [darkMode, setDarkMode] = useState(false);
 
   const genAI = new GoogleGenerativeAI(
-    "AIzaSyCFOvCB7y-1bcGOje2W0eTg2a0NWTTT-Lk"
+    "AIzaSyBKezR-FrHqUuRlyWN5KpL3MDS5O9Q7UjQ"
   );
 
   useEffect(() => {
@@ -118,7 +118,7 @@ const DashboardPage = () => {
     setIsLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
       const prompt = `You are a highly trained medical professional specializing in vaccinations and immunizations for children. Your goal is to provide accurate, up-to-date, and evidence-based medical information to assist parents in making informed decisions regarding vaccination and child health. Your responses should prioritize clarity, empathy, and professionalism.
       
       Guidelines for your responses:
