@@ -20,7 +20,7 @@ const HospitalDashboard = () => {
   const fetchChildrenByEmail = async () => {
     try {
       const response = await axios.get(
-        "https://loud-gretal-immuno-37d08cf0.koyeb.app//api/vaccinations/search-parent",
+        "https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/search-parent",
         {
           params: { email },
           headers: {
@@ -44,7 +44,7 @@ const HospitalDashboard = () => {
     try {
       // Send OTP to parent's email
       const response = await axios.post(
-        `https://loud-gretal-immuno-37d08cf0.koyeb.app//api/vaccinations/send-otp/${vaccinationId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/send-otp/${vaccinationId}`,
         {},
         {
           headers: {
@@ -62,7 +62,7 @@ const HospitalDashboard = () => {
 
       // Verify OTP
       const verifyResponse = await axios.post(
-        `https://loud-gretal-immuno-37d08cf0.koyeb.app//api/vaccinations/verify-otp/${vaccinationId}`,
+        `https://loud-gretal-immuno-37d08cf0.koyeb.app/api/vaccinations/verify-otp/${vaccinationId}`,
         { otp: enteredOtp },
         {
           headers: {
