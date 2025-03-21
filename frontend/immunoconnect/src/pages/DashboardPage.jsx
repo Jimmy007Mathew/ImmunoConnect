@@ -216,7 +216,7 @@ const DashboardPage = () => {
         <main className="p-4 sm:p-6 lg:p-8">
           <div className="mb-6">
             <h1 className="text-2xl font-bold">
-              {["overview", "profiles", "schedule"]
+              {["overview", "profiles", "schedule","records","centers"]
                 .find((t) => t === activeTab)
                 ?.toUpperCase()}
             </h1>
