@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import Sidebar from "./components/Dashboard/Sidebar";
 import Header from "./components/Dashboard/Header";
-import NotificationsPanel from "./components/Dashboard/NotificationsPanel";
 import ChatAssistant from "./components/Dashboard/ChatAssistant";
 import AddChildModal from "./components/Dashboard/AddChildModal";
 import OverviewTab from "./components/Dashboard/tabs/OverviewTab";
@@ -22,33 +21,14 @@ const DashboardPage = () => {
   const [children, setChildren] = useState([]);
   const [activeTab, setActiveTab] = useState("overview");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      message: "Upcoming vaccination for MMR due in 2 weeks",
-      type: "reminder",
-      time: "2 hours ago",
-    },
-    {
-      id: 2,
-      message: "New vaccination drive in your area",
-      type: "info",
-      time: "1 day ago",
-    },
-    {
-      id: 3,
-      message: "Health record updated for Sarah",
-      type: "success",
-      time: "2 days ago",
-    },
-  ]);
+
   const [newChild, setNewChild] = useState({
     name: "",
     age: "",
     gender: "",
     vaccinations: [],
   });
-  const [showNotificationsPanel, setShowNotificationsPanel] = useState(false);
+
   const [showChat, setShowChat] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
@@ -189,12 +169,8 @@ const DashboardPage = () => {
       <div className="flex-1  lg:ml-72">
         <Header
           openSidebar={() => setIsSidebarOpen(true)}
-          toggleNotifications={() =>
-            setShowNotificationsPanel(!showNotificationsPanel)
-          }
           toggleAddChild={() => setShowAddChild(true)}
           toggleChat={() => setShowChat(true)}
-          notificationCount={notifications.length}
           user={{ name: userName, email: userEmail }}
           onLogout={() => {
             localStorage.clear();
