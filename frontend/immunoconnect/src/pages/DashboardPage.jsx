@@ -10,6 +10,8 @@ import OverviewTab from "./components/Dashboard/tabs/OverviewTab";
 import ProfilesTab from "./components/Dashboard/tabs/ProfilesTab";
 import ScheduleTab from "./components/Dashboard/tabs/ScheduleTab";
 import HealthCenterTab from "./components/Dashboard/tabs/HealthCenterTab";
+import RecordTab from "./components/Dashboard/tabs/RecordTab";
+
 import { jwtDecode } from "jwt-decode";
 
 const DashboardPage = () => {
@@ -238,6 +240,9 @@ const DashboardPage = () => {
           )}
           {activeTab === "centers" && (
             <HealthCenterTab children={children} darkMode={darkMode} />
+          )}
+          {activeTab === "records" && (
+            <RecordTab children={children} darkMode={darkMode} />
           )}
           {activeTab === "schedule" && <ScheduleTab darkMode={darkMode} />}
         </main>
