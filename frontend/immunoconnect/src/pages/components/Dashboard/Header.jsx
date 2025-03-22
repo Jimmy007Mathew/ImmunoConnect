@@ -11,10 +11,8 @@ import {
 
 const Header = ({
   openSidebar,
-  toggleNotifications,
   toggleAddChild,
   toggleChat,
-  notificationCount,
   user,
   onLogout,
   darkMode,
@@ -67,23 +65,6 @@ const Header = ({
               )}
             </button>
 
-            {/* Notification Button */}
-            <button
-              onClick={toggleNotifications}
-              className={`relative p-2 rounded-lg ${
-                darkMode
-                  ? "text-gray-300 hover:text-gray-100 hover:bg-gray-800"
-                  : "text-gray-500 hover:text-gray-700 hover:bg-gray-100"
-              }`}
-              aria-label="Notifications"
-            >
-              <Bell className="h-6 w-6" />
-              {notificationCount > 0 && (
-                <span className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                  {notificationCount}
-                </span>
-              )}
-            </button>
 
             {/* Add Child Button */}
             <button
