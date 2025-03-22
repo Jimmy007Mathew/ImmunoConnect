@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
   page: {
     padding: 40,
     backgroundColor: "#ffffff",
+    position: "relative", // Ensure footer positioning works
   },
   header: {
     marginBottom: 30,
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
   },
   footer: {
     position: "absolute",
-    bottom: 40,
+    bottom: 20, // Adjust as needed
     left: 40,
     right: 40,
     fontSize: 8,
@@ -86,6 +87,7 @@ const VaccinationCardPDF = ({ data }) => {
 
   return (
     <Document>
+      {/* Page 1 */}
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.title}>Immunization Record</Text>
@@ -93,20 +95,28 @@ const VaccinationCardPDF = ({ data }) => {
         </View>
 
         <View style={styles.section}>
+          {/* Child Information */}
           <Text style={{ fontSize: 12, marginBottom: 8 }}>
             Name: {data.childName} | DOB:{" "}
             {format(new Date(data.dob), "dd/MM/yyyy")}
           </Text>
-          <Text style={{ fontSize: 12, marginBottom: 20 }}>
+          <Text style={{ fontSize: 12, marginBottom: 8 }}>
             Parent/Guardian: {data.parentName}
           </Text>
+          <Text style={{ fontSize: 12, marginBottom: 20 }}>
+            Parent Email: {data.parentEmail}
+          </Text>
 
+          {/* Vaccination Table */}
           <View style={styles.tableHeader}>
             <Text style={[styles.cell, { fontWeight: "bold" }]}>Vaccine</Text>
             <Text style={[styles.cell, { fontWeight: "bold" }]}>
               Date Administered
             </Text>
             <Text style={[styles.cell, { fontWeight: "bold" }]}>Status</Text>
+            <Text style={[styles.cell, { fontWeight: "bold" }]}>
+              Verified By
+            </Text>
           </View>
 
           {data.vaccines.map((vaccine, index) => (
@@ -120,21 +130,27 @@ const VaccinationCardPDF = ({ data }) => {
               <Text style={styles.cell}>
                 {vaccine.status === "Completed" ? "✓ Completed" : "Pending"}
               </Text>
+              <Text style={styles.cell}>
+                {vaccine.verifiedBy || "Not Verified"}
+              </Text>
             </View>
           ))}
         </View>
 
+        {/* Footer */}
         <View style={styles.footer}>
           <Text>
             This document is generated electronically and does not require a
             physical signature.
           </Text>
           <Text>
-            Issued by ImmunoConnect | contact@immunoconnect.com | +1 555 123
-            4567
+            Issued by ImmunoConnect | immunoconnect@gmail.com | 0091-123-4567890
           </Text>
         </View>
       </Page>
+
+      {/* Additional Pages (if needed) */}
+      {/* You can add more pages here if the content exceeds one page */}
     </Document>
   );
 };
@@ -186,10 +202,12 @@ const RecordTab = ({ darkMode }) => {
         childName: child.name,
         dob: child.dateOfBirth,
         parentName: child.parent.name,
+        parentEmail: child.parentEmail, // Include parent email
         vaccines: child.vaccinations.map((vaccine) => ({
           name: vaccine.name,
           actualDate: vaccine.actualDate,
           status: vaccine.status,
+          verifiedBy: vaccine.verifiedBy, // Include hospital that verified the vaccination
         })),
       };
 
