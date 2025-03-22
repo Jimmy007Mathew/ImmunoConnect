@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Syringe,
   Shield,
@@ -7,10 +8,20 @@ import {
   Calendar,
   X,
   Stethoscope,
+  Check,
+  XCircle,
 } from "lucide-react";
 
 const VaccineInfo = () => {
   const [selectedVaccine, setSelectedVaccine] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [showFeedback, setShowFeedback] = useState(false);
+  const [quizStarted, setQuizStarted] = useState(false);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [score, setScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [userAnswers, setUserAnswers] = useState([]);
+  const [currentQuestions, setCurrentQuestions] = useState([]);
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -234,6 +245,172 @@ const VaccineInfo = () => {
     },
   ];
 
+  const questionsPool = [
+    {
+      question: "What is the primary purpose of vaccines?",
+      options: [
+        "To cure existing diseases",
+        "To prevent specific diseases",
+        "To reduce fever",
+        "To boost energy levels",
+      ],
+      correctAnswer: "To prevent specific diseases",
+    },
+    {
+      question: "Which vaccine is given at birth?",
+      options: ["BCG", "MMR", "HPV", "Influenza"],
+      correctAnswer: "BCG",
+    },
+    {
+      question: "What disease does the MMR vaccine protect against?",
+      options: ["Measles", "Mumps", "Rubella", "All of the above"],
+      correctAnswer: "All of the above",
+    },
+    {
+      question: "What is the recommended age for the DPT booster vaccine?",
+      options: ["1 year", "5-6 years", "10 years", "16 years"],
+      correctAnswer: "5-6 years",
+    },
+    {
+      question:
+        "Which of the following is a potential side effect of vaccines?",
+      options: ["Mild fever", "Severe allergic reaction", "Both", "None"],
+      correctAnswer: "Both",
+    },
+    {
+      question: "What is the primary cause of polio?",
+      options: ["Bacteria", "Virus", "Fungus", "Parasite"],
+      correctAnswer: "Virus",
+    },
+    {
+      question: "Which vaccine is used to prevent tuberculosis?",
+      options: ["BCG", "DTaP", "IPV", "Hepatitis B"],
+      correctAnswer: "BCG",
+    },
+    {
+      question: "What is the full form of OPV?",
+      options: [
+        "Oral Polio Vaccine",
+        "Oral Pertussis Vaccine",
+        "Oral Pneumonia Vaccine",
+        "Oral Plague Vaccine",
+      ],
+      correctAnswer: "Oral Polio Vaccine",
+    },
+    {
+      question: "Which disease is prevented by the JE vaccine?",
+      options: ["Japanese Encephalitis", "Yellow Fever", "Dengue", "Malaria"],
+      correctAnswer: "Japanese Encephalitis",
+    },
+    {
+      question:
+        "What is the primary route of administration for most vaccines?",
+      options: ["Oral", "Intramuscular", "Subcutaneous", "All of the above"],
+      correctAnswer: "All of the above",
+    },
+    {
+      question: "Which vaccine is given to prevent rotavirus?",
+      options: ["RVV", "IPV", "OPV", "DTaP"],
+      correctAnswer: "RVV",
+    },
+    {
+      question: "What is the recommended age for the Td booster vaccine?",
+      options: ["5 years", "10 years", "16 years", "Both 10 and 16 years"],
+      correctAnswer: "Both 10 and 16 years",
+    },
+    {
+      question: "Which of the following is a bacterial infection?",
+      options: ["Polio", "Tetanus", "Measles", "Rubella"],
+      correctAnswer: "Tetanus",
+    },
+    {
+      question: "What is the primary symptom of measles?",
+      options: ["Fever", "Rash", "Cough", "All of the above"],
+      correctAnswer: "All of the above",
+    },
+    {
+      question: "Which vaccine is used to prevent pneumococcal diseases?",
+      options: ["PCV", "IPV", "OPV", "DTaP"],
+      correctAnswer: "PCV",
+    },
+    {
+      question: "What is the primary benefit of vaccination?",
+      options: [
+        "Prevents disease spread",
+        "Reduces healthcare costs",
+        "Protects vulnerable populations",
+        "All of the above",
+      ],
+      correctAnswer: "All of the above",
+    },
+    {
+      question: "Which vaccine is given at 6 weeks of age?",
+      options: ["OPV-1", "Pentavalent-1", "RVV-1", "All of the above"],
+      correctAnswer: "All of the above",
+    },
+    {
+      question: "What is the primary cause of Japanese Encephalitis?",
+      options: ["Bacteria", "Virus", "Fungus", "Parasite"],
+      correctAnswer: "Virus",
+    },
+    {
+      question: "Which vaccine is used to prevent diphtheria?",
+      options: ["DTaP", "IPV", "OPV", "Hepatitis B"],
+      correctAnswer: "DTaP",
+    },
+    {
+      question: "What is the primary symptom of tetanus?",
+      options: ["Muscle stiffness", "Fever", "Headache", "All of the above"],
+      correctAnswer: "All of the above",
+    },
+  ];
+
+  const startQuiz = () => {
+    const shuffled = [...questionsPool].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, 5);
+    setCurrentQuestions(selected);
+    setQuizStarted(true);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setQuizCompleted(false);
+    setUserAnswers([]);
+    setSelectedAnswer(null);
+    setShowFeedback(false);
+  };
+
+  const handleAnswer = (answer) => {
+    setSelectedAnswer(answer);
+    setShowFeedback(true);
+
+    const isCorrect =
+      currentQuestions[currentQuestionIndex].correctAnswer === answer;
+
+    setTimeout(() => {
+      setUserAnswers([...userAnswers, { answer, isCorrect }]);
+      if (isCorrect) {
+        setScore(score + 1);
+      }
+      if (currentQuestionIndex < currentQuestions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setSelectedAnswer(null);
+        setShowFeedback(false);
+      } else {
+        setQuizCompleted(true);
+      }
+    }, 1500);
+  };
+
+  const resetQuiz = () => {
+    setQuizStarted(false);
+    setCurrentQuestionIndex(0);
+    setScore(0);
+    setQuizCompleted(false);
+    setUserAnswers([]);
+    setSelectedAnswer(null);
+    setShowFeedback(false);
+    setCurrentQuestions([]);
+  };
+
   const Modal = ({ vaccine, onClose }) => (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
       <div
@@ -305,9 +482,131 @@ const VaccineInfo = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-12">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50 py-12 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 z-0">
+        {/* Top left animated circle */}
+        <motion.div
+          className="absolute -top-32 -left-32 w-96 h-96 bg-blue-200/30 rounded-full"
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Bottom right animated circle */}
+        <motion.div
+          className="absolute -bottom-32 -right-32 w-96 h-96 bg-blue-300/20 rounded-full"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            rotate: [90, 0, 90],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+
+        {/* Middle floating elements */}
+        <motion.div
+          className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-100/20 rounded-full"
+          animate={{
+            y: [-20, 20, -20],
+            x: [-10, 10, -10],
+            rotate: [0, 180, 0],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-blue-200/20 rounded-full"
+          animate={{
+            y: [20, -20, 20],
+            x: [10, -10, 10],
+            rotate: [180, 0, 180],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Bottom left circle */}
+        <motion.div
+          className="absolute -bottom-20 -left-20 w-64 h-64 bg-blue-300/20 rounded-full"
+          animate={{
+            scale: [1.1, 1, 1.1],
+            rotate: [90, 0, 90],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Top center small circle */}
+        <motion.div
+          className="absolute top-20 left-1/2 w-20 h-20 bg-blue-100/30 rounded-full"
+          animate={{
+            y: [-15, 15, -15],
+            x: [-10, 10, -10],
+            rotate: [0, 180, 0],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Bottom center small circle */}
+        <motion.div
+          className="absolute bottom-20 left-1/2 w-20 h-20 bg-blue-300/20 rounded-full"
+          animate={{
+            y: [15, -15, 15],
+            x: [10, -10, 10],
+            rotate: [180, 0, 180],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        {/* Gradient overlay */}
+        <motion.div
+          className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white/50 to-blue-50/50"
+          animate={{
+            opacity: [0.3, 0.5, 0.3],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-4 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center mb-16"
+        >
           <h1 className="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
             <Calendar className="h-10 w-10 text-blue-600" />
             Vaccination Timeline
@@ -316,26 +615,32 @@ const VaccineInfo = () => {
             A comprehensive guide to childhood immunizations from birth through
             adolescence
           </p>
-        </div>
+        </motion.div>
 
         <div className="max-w-4xl mx-auto relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-blue-200 via-purple-200 to-pink-200"></div>
 
           <div className="space-y-12">
             {vaccines.map((vaccine, index) => (
-              <div
+              <motion.div
                 key={vaccine.id}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`relative flex ${
                   index % 2 === 0 ? "justify-start" : "justify-end"
                 }`}
               >
                 <div
-                  className={`w-[calc(50%-2rem)] ${
+                  className={`w-full md:w-[calc(50%-2rem)] ${
                     index % 2 === 0 ? "mr-8" : "ml-8"
                   }`}
                   onClick={() => setSelectedVaccine(vaccine.id)}
                 >
-                  <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden"
+                  >
                     <div className="relative h-40">
                       <img
                         src={vaccine.image}
@@ -362,20 +667,28 @@ const VaccineInfo = () => {
                         {vaccine.description}
                       </p>
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
 
                 <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 top-1/2">
-                  <div
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
                     className={`w-4 h-4 rounded-full ${vaccine.color} border-4 border-white shadow-lg`}
-                  ></div>
+                  ></motion.div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        <div className="max-w-6xl mx-auto mt-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="max-w-6xl mx-auto mt-24"
+        >
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
               <Stethoscope className="h-8 w-8 text-blue-600" />
@@ -387,7 +700,7 @@ const VaccineInfo = () => {
             </p>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+          <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
@@ -408,7 +721,13 @@ const VaccineInfo = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200">
                   {diseases.map((disease, index) => (
-                    <tr key={index} className="hover:bg-gray-50">
+                    <motion.tr
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      key={index}
+                      className="hover:bg-gray-50"
+                    >
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">
                         {disease.name}
                       </td>
@@ -429,7 +748,7 @@ const VaccineInfo = () => {
                           {disease.severity}
                         </span>
                       </td>
-                    </tr>
+                    </motion.tr>
                   ))}
                 </tbody>
               </table>
@@ -444,7 +763,216 @@ const VaccineInfo = () => {
               vaccine-preventable diseases.
             </p>
           </div>
-        </div>
+        </motion.div>
+
+        {/* New Section: Educational Videos */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="max-w-6xl mx-auto mt-24"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
+              <Stethoscope className="h-8 w-8 text-blue-600" />
+              Educational Videos
+            </h2>
+            <p className="text-gray-600">
+              Learn more about the history of vaccines and how they work.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Video 1: The History of Vaccines */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-4 md:ml-8">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                The History of Vaccines
+              </h3>
+              <div className="w-full overflow-hidden rounded-lg">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src="https://www.youtube.com/embed/qRhKe9yLhPM?si=WXADW2Scp1fc2Hut"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="rounded-lg"
+                ></iframe>
+              </div>
+            </div>
+
+            {/* Video 2: How Vaccines Work */}
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-4">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                How Vaccines Work
+              </h3>
+              <div className="w-full overflow-hidden rounded-lg">
+                <iframe
+                  width="100%"
+                  height="315"
+                  src="https://www.youtube.com/embed/rb7TVW77ZCs?si=BRMCCsmRsf15Y_sZ"
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                  className="rounded-lg"
+                ></iframe>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Quiz Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="max-w-6xl mx-auto mt-24"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
+              <Stethoscope className="h-8 w-8 text-blue-600" />
+              Vaccine Knowledge Quiz
+            </h2>
+            <p className="text-gray-600">
+              Test your knowledge about vaccines and vaccine-preventable
+              diseases.
+            </p>
+          </div>
+
+          {!quizStarted ? (
+            <motion.div
+              className="text-center"
+              initial={{ scale: 0.9 }}
+              animate={{ scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <button
+                onClick={startQuiz}
+                className="bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 font-semibold text-lg shadow-lg hover:shadow-xl"
+              >
+                Start Quiz
+              </button>
+            </motion.div>
+          ) : (
+            <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8">
+              {!quizCompleted ? (
+                <div>
+                  <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-xl font-semibold text-gray-900">
+                      Question {currentQuestionIndex + 1} of{" "}
+                      {currentQuestions.length}
+                    </h3>
+                    <div className="bg-blue-100 px-4 py-2 rounded-full">
+                      <span className="text-blue-800 font-medium">
+                        Score: {score}/{currentQuestionIndex}
+                      </span>
+                    </div>
+                  </div>
+
+                  <motion.p
+                    key={currentQuestionIndex}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-lg text-gray-700 mb-6 font-medium"
+                  >
+                    {currentQuestions[currentQuestionIndex].question}
+                  </motion.p>
+
+                  <div className="grid gap-4">
+                    <AnimatePresence mode="wait">
+                      {currentQuestions[currentQuestionIndex].options.map(
+                        (option, index) => {
+                          const isCorrectAnswer =
+                            option ===
+                            currentQuestions[currentQuestionIndex]
+                              .correctAnswer;
+                          const isSelected = option === selectedAnswer;
+                          const showCorrect = showFeedback && isCorrectAnswer;
+                          const showIncorrect =
+                            showFeedback && isSelected && !isCorrectAnswer;
+
+                          return (
+                            <motion.button
+                              key={`${currentQuestionIndex}-${index}`}
+                              initial={{ opacity: 0, x: -20 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              exit={{ opacity: 0, x: 20 }}
+                              transition={{ duration: 0.3, delay: index * 0.1 }}
+                              onClick={() =>
+                                !showFeedback && handleAnswer(option)
+                              }
+                              disabled={showFeedback}
+                              className={`
+                              relative flex items-center justify-between px-6 py-4 rounded-lg text-left
+                              transition-all duration-300 transform hover:scale-[1.02]
+                              ${
+                                showCorrect
+                                  ? "bg-green-100 text-green-800 border-2 border-green-500"
+                                  : showIncorrect
+                                  ? "bg-red-100 text-red-800 border-2 border-red-500"
+                                  : "bg-blue-50 text-gray-700 hover:bg-blue-100 border-2 border-transparent"
+                              }
+                            `}
+                            >
+                              <span className="text-lg">{option}</span>
+                              {showCorrect && (
+                                <Check className="h-6 w-6 text-green-600 ml-2" />
+                              )}
+                              {showIncorrect && (
+                                <XCircle className="h-6 w-6 text-red-600 ml-2" />
+                              )}
+                            </motion.button>
+                          );
+                        }
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+              ) : (
+                <motion.div
+                  className="text-center"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                    Quiz Completed!
+                  </h3>
+                  <div className="mb-8">
+                    <div className="text-5xl font-bold mb-4">
+                      {score}/{currentQuestions.length}
+                    </div>
+                    <p className="text-lg">
+                      {score === currentQuestions.length ? (
+                        <span className="text-green-600 font-semibold">
+                          Perfect score! You're a vaccine expert! 🎉
+                        </span>
+                      ) : score >= currentQuestions.length / 2 ? (
+                        <span className="text-yellow-600 font-semibold">
+                          Good job! Keep learning about vaccines! 👍
+                        </span>
+                      ) : (
+                        <span className="text-red-600 font-semibold">
+                          Don't worry! Learning about vaccines is a journey! 💪
+                        </span>
+                      )}
+                    </p>
+                  </div>
+                  <button
+                    onClick={resetQuiz}
+                    className="bg-blue-600 text-white px-8 py-4 rounded-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 font-semibold text-lg shadow-lg hover:shadow-xl"
+                  >
+                    Try Again
+                  </button>
+                </motion.div>
+              )}
+            </div>
+          )}
+        </motion.div>
       </div>
 
       {selectedVaccine && (
