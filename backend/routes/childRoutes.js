@@ -189,5 +189,22 @@ router.delete('/:childId', async (req, res) => {
     }
 });
 
+router.get('/:childId', async (req, res) => {
+    try {
+        const child = await Child.findById(req.params.childId)
+            .populate('parent', 'name email') // Populate parent details
+            .lean();
+
+        if (!child) {
+            return res.status(404).json({ message: 'Child not found' });
+        }
+
+        res.json(child);
+    } catch (error) {
+        console.error("Error fetching child data:", error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
 // Export the router
 module.exports = router;
