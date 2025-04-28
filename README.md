@@ -1,7 +1,4 @@
-Got it!  
-Here’s a **simpler and clean** version of your **GitHub README.md** — showing cloning instructions, basic description, and only the most important points 👇:
 
----
 
 # ImmunoConnect 🛡️
 
