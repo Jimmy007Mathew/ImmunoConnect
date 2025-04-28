@@ -73,7 +73,7 @@ Built with **React.js**, **Node.js**, **Express.js**, and **MongoDB**.
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/immunoconnect.git
+git clone https://github.com/Jimmy007Mathew/immunoconnect.git
 cd immunoconnect
 ```
 
