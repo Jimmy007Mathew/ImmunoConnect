@@ -72,7 +72,3 @@ EMAIL_PASS=your_email_password
 ## 📜 License
 This project is open-source under the **MIT License**.
 
----
-
-Would you also want a **small screenshot** or **system diagram** added below for GitHub? 📷 (Optional but looks very professional!)  
-Just say if you want! 🚀
