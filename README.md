@@ -1,8 +1,5 @@
-Here’s an updated version of your `README.md` with a **📸 Screenshots** section added, referencing images in the `./screenshots/` directory:
 
----
 
-````markdown
 # ImmunoConnect 🛡️
 
 A simple, user-friendly platform for tracking vaccinations, managing child immunization schedules, and helping healthcare providers verify vaccine records.
@@ -89,7 +86,3 @@ EMAIL_PASS=your_email_password
 
 This project is open-source under the **MIT License**.
 
-```
-
-Let me know if you'd like help generating demo screenshots or adding captions.
-```
