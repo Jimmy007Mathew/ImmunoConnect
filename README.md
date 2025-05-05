@@ -1,5 +1,8 @@
+Here’s an updated version of your `README.md` with a **📸 Screenshots** section added, referencing images in the `./screenshots/` directory:
 
+---
 
+````markdown
 # ImmunoConnect 🛡️
 
 A simple, user-friendly platform for tracking vaccinations, managing child immunization schedules, and helping healthcare providers verify vaccine records.
@@ -19,9 +22,9 @@ It also sends **email notifications** for upcoming vaccinations and provides bas
 
 ## 🚀 Tech Stack
 
-- **Frontend:** React.js, Tailwind CSS
-- **Backend:** Node.js, Express.js
-- **Database:** MongoDB Atlas
+- **Frontend:** React.js, Tailwind CSS  
+- **Backend:** Node.js, Express.js  
+- **Database:** MongoDB Atlas  
 - **Other:** Google Maps API, Nodemailer
 
 ---
@@ -32,9 +35,10 @@ It also sends **email notifications** for upcoming vaccinations and provides bas
 ```bash
 git clone https://github.com/Jimmy007Mathew/immunoconnect.git
 cd immunoconnect
-```
+````
 
 ### 2. Setup Frontend
+
 ```bash
 cd frontend
 npm install
@@ -42,6 +46,7 @@ npm run dev
 ```
 
 ### 3. Setup Backend
+
 ```bash
 cd backend
 npm install
@@ -51,6 +56,7 @@ npm run server
 ### 4. Environment Variables
 
 Create a `.env` file inside the **backend** folder:
+
 ```
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
@@ -58,17 +64,32 @@ EMAIL_USER=your_email@example.com
 EMAIL_PASS=your_email_password
 ```
 
+---
 
 ## 📚 Main Features
-- Parent login and child vaccination tracking
-- Healthcare provider login and record verification
-- Admin dashboard for hospital approval
-- Email notifications for upcoming vaccinations
-- Educational information about vaccines
-- Responsive design (Mobile + Desktop)
+
+* Parent login and child vaccination tracking
+* Healthcare provider login and record verification
+* Admin dashboard for hospital approval
+* Email notifications for upcoming vaccinations
+* Educational information about vaccines
+* Responsive design (Mobile + Desktop)
+
+---
+
+## 📸 Screenshots
+
+| Parent Dashboard            | Schedule Tab                | Quiz Platform               |
+| --------------------------- | --------------------------- | --------------------------- |
+| ![](./screenshots/img1.png) | ![](./screenshots/img2.png) | ![](./screenshots/img3.png) |
 
 ---
 
 ## 📜 License
+
 This project is open-source under the **MIT License**.
 
+```
+
+Let me know if you'd like help generating demo screenshots or adding captions.
+```
